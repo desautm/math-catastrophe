@@ -1,0 +1,46 @@
+---
+title: "Sites webs"
+author: "Marc-André Désautels"
+date: "2024-02-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+- [Two disasters caused by computer arithmetic errors](https://www-users.cse.umn.edu/~arnold/455.f96/disasters.html)
+- [Disasters because of numerical errors](https://sites.math.rutgers.edu/~sg1108/Math373/Matherrors.html)
+- [The number glitch that can lead to catastrophe](https://www.bbc.com/future/article/20150505-the-numbers-that-lead-to-disaster)
+- [Famous number computing errors](https://blog.penjee.com/famous-number-computing-errors/)
+- [Some disasters attributable to bad numerical computing](https://www.iro.umontreal.ca/~mignotte/IFT2425/Disasters.html)
+- [Therac 25](https://en.wikipedia.org/wiki/Therac-25#Root_causes)
+- [Integer Overflow](https://en.wikipedia.org/wiki/Integer_overflow)
+- [Vol Air Canada 143](https://fr.wikipedia.org/wiki/Vol_Air_Canada_143)
+- [When NASA Lost a Spacecraft Due to a Metric Math Mistake](https://www.simscale.com/blog/nasa-mars-climate-orbiter-metric/)
+- [10 Simple But Costly Math Errors In History](https://listverse.com/2019/08/30/10-simple-but-costly-math-errors-in-history/)
+- [Math Mistakes That Make the News](https://webpages.math.luc.edu/~ajs/courses/100fall2018/websites/mathMistakesNews.pdf)
+- [Epic failures: 11 infamous software bugs](https://www.computerworld.com/article/2515483/epic-failures-11-infamous-software-bugs.html)
+- [Bug de l'an 2038](https://fr.wikipedia.org/wiki/Bug_de_l%27an_2038)
+
+
+## Idées
+
+Idées
+
+Here are a few examples of computer errors that have caused serious problems in society:
+
+The Therac-25: This was a medical radiation therapy machine that was involved in several accidents in the 1980s due to a software bug that caused the machine to deliver lethal doses of radiation to patients.
+
+The Ariane 5 rocket explosion: In 1996, the Ariane 5 rocket exploded just seconds after takeoff due to a software bug that caused the rocket to lose its orientation.
+
+The Patriot Missile Defense System failure: During the Gulf War in 1991, a software error in the Patriot Missile Defense System caused it to fail, resulting in the deaths of 28 soldiers.
+
+The London Stock Exchange crash: In 1986, a software bug caused the London Stock Exchange to crash, leading to a loss of billions of dollars.
+
+The Mariner 1 spacecraft failure: In 1962, a coding error caused the Mariner 1 spacecraft to veer off course and be destroyed shortly after takeoff.
+
+These are just a few examples of computer errors that have had serious consequences. It's important to thoroughly test and debug software to avoid such problems.
+
