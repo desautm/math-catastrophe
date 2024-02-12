@@ -614,10 +614,17 @@ T_n = \sum_{k=0}^{n-1} a_k 2^k
 <ul>
 <li class="fragment"><p>Le compteur de niveau du Pac-Man original est emmagasiné dans un entier à huit bits.</p></li>
 <li class="fragment"><p>La valeur maximale est donc 255.</p></li>
+<<<<<<< HEAD
 <li class="fragment"><p>Le compteur de niveau débute à 0. Pour calculer le compteur de fruits, il ajoute 1.</p></li>
 <li class="fragment"><p>En raison du débordement, ajouter 1 à 255 donne 0, et le jeu esssaie de dessiner 256 fruits à l’écran jusqu’à qu’il déborde à 0.</p></li>
 <li class="fragment"><p>Le résultat est le chaos apparent sur la partie droite du labyrinthe, car la mémoire débute par le bas, suivi par les colonnes du côté droit.</p></li>
 </ul>
+=======
+<li class="fragment"><p>Le compteur de niveau débute à 0; le compteur de fruit débute à 1 et il ajoute 1 à chaque niveau.</p></li>
+<li class="fragment"><p>En raison du débordement, ajouter 1 à 255 donne 0.</p></li>
+</ul>
+<p>The level counter in the original Pac-Man is stored as an 8-bit integer, meaning the highest value it can hold is 255. The level counter starts with 0 internally, but for calculating the fruit counter it adds 1; however, because of overflow, adding 1 to 255 would result in 0, and the game tries to count fruits from 1, causing the game to attempt to draw 256 fruit to the screen until it overflows to 0. The result is the garbled mess on the right side of the maze, because the screen memory starts with the bottom, followed by the columns from the right side.</p>
+>>>>>>> 5f081e5b44f46186263c5cbb6c58f7e4f925e65f
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
