@@ -1,0 +1,250 @@
+---
+title: "FAIL"
+subtitle: "... quand les mathématiques s'effondrent"
+author: "Marc-André Désautels"
+format: 
+  revealjs:
+    incremental: true
+editor: visual
+title-slide-attributes:
+  data-background-color: "black"
+---
+
+##  {background-image="https://www.cs.cornell.edu/~hweather/FaultTolerance/HW1/y2k_checklist.gif" background-size="contain"}
+
+# La représentation des nombres {background-color="black" background-position="center"}
+
+## Système de numération
+
+Un **système de numération** permet de compter des objets et de les représenter par des nombres. Un système de numération **positionnel** possède trois éléments :
+
+-   Base $b$ (un entier supérieur à 1)
+
+-   Symboles (digits) : 0, 1, 2, ..., $b-1$
+
+-   Poids des symboles selon la position et la base, où poids=base<sup>position</sup>
+
+## Représentation polynomiale
+
+Le système positionnel utilise la **représentation polynomiale**. Celle-ci est donnée par: 
+
+$$
+\begin{aligned}
+(a_na_{n-1}\ldots a_1a_0,a_{-1}a_{-2}\ldots a_{-m})_b &= \sum_{k=-m}^n a_k b^k
+\end{aligned}
+$$ 
+
+où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de votre système de numération).
+
+## Représentation binaire
+
+-   Base = 2
+
+-   Symboles ordonnés qu'on nomme les *chiffres* : 0, 1.
+
+-   Le poids des symboles est donné par 2<sup>position</sup>
+
+. . .
+
+Par exemple:
+
+$$
+\begin{align}
+(1 \ 0100\ 1111)_2 &= 1\cdot 2^8 + 1\cdot 2^6 + 1\cdot 2^3 + 1\cdot 2^2 + \\
+& \qquad + 1\cdot 2^1 + 1\cdot 2^0 \\
+&= (335)_{10}
+\end{align}
+$$
+
+## L'addition en binaire
+
+-   0 + 0 = 0
+
+-   0 + 1 = 1
+
+-   1 + 0 = 1
+
+-   1 + 1 = 10
+
+. . .
+
+avec un report de 1 à la dernière addition.
+
+. . .
+
+$$
+\begin{array}{ccccccc}
+  &   &   & \tiny{1} &   & \tiny{1} &  \\
+  & 1 & 0 & 0 & 1 & 0 & 1 \\
++ &   & 1 & 0 & 1 & 0 & 1 \\
+\hline
+  & 1 & 1 & 1 & 0 & 1 & 0 \\
+\end{array}
+$$
+
+## Les trains de bits
+
+- Les ordinateurs utilisent des bits pour emmagasiner de l'information. 
+
+- Un bit peut prendre la valeur 0 ou la valeur 1.
+
+- L'information est emmagasinée dans des trains de bits ($T_n$) de longueur $n$ (une succession de $n$ bits).
+
+- $T_4 = 0110$
+
+- Dans la majorité des langages informatiques, les trains de bits ont une longueur prédéterminée, qu'il est impossible de dépasser.
+
+# Les entiers non signés {background-color="black" background-position="center"}
+
+## Les entiers non signés
+
+::: {.callout-note}
+## Entiers non signés
+
+La représentation binaire non signée sur $n$ bits d’un entier $x\in\left\{0,1,2,\ldots,2^n-1\right\}$ est le train de bits correspondant à l’écriture de $x$ en base 2.
+
+$$
+T_n = \sum_{k=0}^{n-1} a_k 2^k
+$$
+:::
+
+. . .
+
+L'entier maximal pouvant être représenté correspond au train de bits de longueur $n$ composé uniquement de 1.
+
+$$
+\text{Entier maximal} = \sum_{k=0}^{n-1} 1 \cdot 2^k = 2^n-1
+$$
+
+## Les entiers non signés
+
+|          | Nombre de bits | Maximum                    |
+|----------|----------------|----------------------------|
+| `uint8`  | 8              | 255                        |
+| `uint16` | 16             | 65 535                     |
+| `uint32` | 32             | 4 294 967 295              |
+| `uint64` | 64             | 18 446 744 073 709 551 615 |
+
+:  {.striped .hover}
+
+## Débordement
+
+- Sur 8 bits, la plus grande valeur représentable est 255.
+
+- Les nombres supérieurs à cette valeur ne peuvent tout simplement pas être représentés avec seulement 8 bits.
+
+- Pire encore, si une opération arithmétique produit une valeur supérieure à cette limite, il se produit un **dépassement d’entier** (en anglais *integer overflow*).
+
+. . .
+
+```{r,engine = 'tikz'}
+#| echo: false
+#| label: debordement_entier
+#| fig-align: center
+#| out-width: 40%
+
+\usetikzlibrary{positioning}
+\begin{tikzpicture}
+
+\tikzstyle{mantisse}=[very thick]
+
+\matrix [column sep=0cm]
+{
+\node (f-8) [mantisse] {\phantom{0}};
+& \node (f-7) [mantisse] {1};
+& \node (f-6) [mantisse] {1};
+& \node (f-5) [mantisse] {1};
+& \node (f-4) [mantisse] {1};
+& \node (v-7)  [mantisse] {\phantom{1}};
+& \node (f-3) [mantisse] {1};
+& \node (f-2) [mantisse] {1};
+& \node (f-1) [mantisse] {1};
+& \node (f-0) [mantisse] {1};  
+\\
+};
+\node[below=0.15cm of f-8] (g-8) {};
+\node[below=0.15cm of f-0] (g-0) {1};
+\node[left=0.15cm of g-8] (g-9) {+};
+
+\node[below = 0.55cm of f-8] (h-8) [mantisse] {};
+\node[below = 0.55cm of f-7] (h-7) [mantisse] {0};
+\node[below = 0.55cm of f-6] (h-6) [mantisse] {0};
+\node[below = 0.55cm of f-5] (h-5) [mantisse] {0};
+\node[below = 0.55cm of f-4] (h-4) [mantisse] {0};
+\node[below = 0.55cm of f-3] (h-3) [mantisse] {0};
+\node[below = 0.55cm of f-2] (h-2) [mantisse] {0};
+\node[below = 0.55cm of f-1] (h-1) [mantisse] {0};
+\node[below = 0.55cm of f-0] (h-0) [mantisse] {0};
+
+\node[left=0.15cm of h-7] (h-9) [mantisse] {1};
+
+\node[below=0.5cm of h-9] (i-1) [draw,rectangle] {Valeur perdue};
+\draw[->] (i-1)--(h-9);
+
+\draw (h-9.north west) -- (h-0.north east);
+
+\end{tikzpicture}
+```
+
+## Python
+
+En `Python`, contrairement à la plupart des langages informatiques, les entiers sont représentés avec une précision infinie. C’est-à-dire que la seule limite correspond à la mémoire interne de la machine que vous utilisez. 
+
+```{python}
+#| echo: true
+from sys import getsizeof
+
+n1 = 2**32
+n2 = 2**128
+
+print(getsizeof(n1), getsizeof(n2))
+```
+
+## Dans les autres langages
+
+Cependant, dans la majorité des langages informatiques, la précision de la représentation des entiers est **finie**, c’est-à-dire qu’un certain nombre de bits est alloué en mémoire pour stocker votre nombre et vous ne pouvez pas le dépasser.
+
+. . .
+
+Pour obtenir les mêmes résultats en `Python`, nous utiliserons la librarie `numpy` qui contient des formats d'entiers à précision fixe.
+
+. . .
+
+```{python}
+#| echo: true
+import numpy as np
+
+a = np.uint8(255)
+b = np.uint8(256)
+print(a, b)
+```
+
+# PAC-MAN {background-color="black" background-position="center"}
+
+## {background-image="https://media2.giphy.com/media/d9QiBcfzg64Io/giphy.gif"
+background-size="contain"
+background-color="black"}
+
+## {background-video="pac_man.mp4"
+background-size="contain"
+background-color="black"}
+
+## Le niveau 256
+
+- Le compteur de niveau du Pac-Man original est emmagasiné dans un entier à huit bits. 
+
+- La valeur maximale est donc 255.
+
+- Le compteur de niveau débute à 0; le compteur de fruit débute à 1 et il ajoute 1 à chaque niveau.
+
+- En raison du débordement, ajouter 1 à 255 donne 0.
+
+The level counter in the original Pac-Man is stored as an 8-bit integer, meaning the highest value it can hold is 255. The level counter starts with 0 internally, but for calculating the fruit counter it adds 1; however, because of overflow, adding 1 to 255 would result in 0, and the game tries to count fruits from 1, causing the game to attempt to draw 256 fruit to the screen until it overflows to 0. The result is the garbled mess on the right side of the maze, because the screen memory starts with the bottom, followed by the columns from the right side.
+
+
+
+
+
+
+
+
