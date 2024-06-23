@@ -12,6 +12,8 @@ execute:
   cache: true
 ---
 
+# Les erreurs graphiques {background-color="black" background-position="center"}
+
 ##  {background-image="https://www.cs.cornell.edu/~hweather/FaultTolerance/HW1/y2k_checklist.gif" background-size="contain"}
 
 # La représentation des nombres {background-color="black" background-position="center"}
