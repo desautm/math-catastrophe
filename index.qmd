@@ -8,6 +8,8 @@ format:
 editor: visual
 title-slide-attributes:
   data-background-color: "black"
+execute:
+  cache: true
 ---
 
 ##  {background-image="https://www.cs.cornell.edu/~hweather/FaultTolerance/HW1/y2k_checklist.gif" background-size="contain"}
@@ -56,6 +58,22 @@ $$
 \end{align}
 $$
 
+## Représentation binaire
+
+-   On précède le nombre par `0b` si on veut identifier un nombre sous forme binaire en `Python`.
+
+. . .
+
+Par exemple:
+
+```{python}
+#| echo: true
+
+a = 101001111
+b = 0b101001111
+print(a, b)
+```
+
 ## L'addition en binaire
 
 -   0 + 0 = 0
@@ -101,12 +119,49 @@ $$
 ::: {.callout-note}
 ## Entiers non signés
 
-La représentation binaire non signée sur $n$ bits d’un entier $x\in\left\{0,1,2,\ldots,2^n-1\right\}$ est le train de bits correspondant à l’écriture de $x$ en base 2.
+La représentation binaire non signée sur $n$ bits d’un entier $x$ est le train de bits correspondant à l’écriture de $x$ en base 2.
 
-$$
-T_n = \sum_{k=0}^{n-1} a_k 2^k
-$$
 :::
+
+. . .
+
+Par exemple, en utilisant 8 bits:
+
+. . .
+
+```{r engine='tikz'}
+\usetikzlibrary{matrix}
+\begin{tikzpicture}
+
+\tikzstyle{exposant}=[
+                        draw, 
+                        very thick, 
+                        fill=green!20!white
+                    ]
+
+\matrix [column sep=0cm, row sep = 0.1cm]
+{
+    \node (a-7) [exposant] {1};
+  & \node (a-6) [exposant] {1};
+  & \node (a-5) [exposant] {0};
+  & \node (a-4) [exposant] {0};
+  & \node (a-3) [exposant] {1};
+  & \node (a-2) [exposant] {1};
+  & \node (a-1) [exposant] {0};
+  & \node (a-0) [exposant] {0};
+\\
+};
+
+\foreach \i in {0,1,...,7}{
+    \node[below] at ([shift=({0cm,-0.01cm})]a-\i.south) {\tiny{$2^\i$}};
+}
+
+\node[right] at ([shift=({0.01cm,0cm})]a-0.east) {$=204$};
+
+\end{tikzpicture}
+```
+
+## Les entiers non signés
 
 . . .
 
@@ -115,6 +170,44 @@ L'entier maximal pouvant être représenté correspond au train de bits de longu
 $$
 \text{Entier maximal} = \sum_{k=0}^{n-1} 1 \cdot 2^k = 2^n-1
 $$
+
+. . .
+
+Par exemple, en utilisant 8 bits:
+
+. . .
+
+```{r engine='tikz'}
+\usetikzlibrary{matrix}
+\begin{tikzpicture}
+
+\tikzstyle{exposant}=[
+                        draw, 
+                        very thick, 
+                        fill=green!20!white
+                    ]
+
+\matrix [column sep=0cm, row sep = 0.1cm]
+{
+    \node (a-7) [exposant] {1};
+  & \node (a-6) [exposant] {1};
+  & \node (a-5) [exposant] {1};
+  & \node (a-4) [exposant] {1};
+  & \node (a-3) [exposant] {1};
+  & \node (a-2) [exposant] {1};
+  & \node (a-1) [exposant] {1};
+  & \node (a-0) [exposant] {1};
+\\
+};
+
+\foreach \i in {0,1,...,7}{
+    \node[below] at ([shift=({0cm,-0.01cm})]a-\i.south) {\tiny{$2^\i$}};
+}
+
+\node[right] at ([shift=({0.01cm,0cm})]a-0.east) {$=255$};
+
+\end{tikzpicture}
+```
 
 ## Les entiers non signés
 
@@ -190,6 +283,8 @@ $$
 
 En `Python`, contrairement à la plupart des langages informatiques, les entiers sont représentés avec une précision infinie. C’est-à-dire que la seule limite correspond à la mémoire interne de la machine que vous utilisez. 
 
+. . .
+
 ```{python}
 #| echo: true
 from sys import getsizeof
@@ -199,6 +294,10 @@ n2 = 2**128
 
 print(getsizeof(n1), getsizeof(n2))
 ```
+
+. . .
+
+Par exemple, $2^{32}$ est représenté en utilisant 32 bits et $2^{128}$ est représenté en utilisant 44 bits.
 
 ## Dans les autres langages
 
@@ -214,37 +313,1128 @@ Pour obtenir les mêmes résultats en `Python`, nous utiliserons la librarie `nu
 #| echo: true
 import numpy as np
 
-a = np.uint8(255)
-b = np.uint8(256)
+a = np.array(255).astype('uint8')
+b = np.array(1).astype('uint8')
 print(a, b)
+```
+
+## Débordement pour entiers non signés
+
+. . .
+
+```{python}
+#| echo: true
+#| eval: false
+import numpy as np
+
+print("Valeur réelle", "Valeur non signée".rjust(20))
+for i in range(253, 259):
+  num = np.array(i).astype('uint8')
+  print(f"{i:8,.0f}", f"{num:17,.0f}")
+```
+
+```{python}
+#| echo: false
+import numpy as np
+
+print("Valeur réelle", "Valeur non signée".rjust(20))
+for i in range(253, 259):
+  num = np.array(i).astype('uint8')
+  print(f"{i:8,.0f}", f"{num:17,.0f}")
 ```
 
 # PAC-MAN {background-color="black" background-position="center"}
 
-## {background-image="https://media2.giphy.com/media/d9QiBcfzg64Io/giphy.gif"
+## {background-image="https://media.cnn.com/api/v1/images/stellar/prod/200518114838-05-pac-man-40.jpg?q=w_1110,c_fill/f_webp"
 background-size="contain"
 background-color="black"}
 
 ## {background-video="pac_man.mp4"
 background-size="contain"
+background-color="black"
+background-position="left"}
+
+## PAC-MAN {background-color="black"}
+
+- Les niveaux sont mémorisés, à partir de 0, dans un entier non signé de 8 bits.
+- Le compteur *fruits* est lui aussi mémorisé dans un entier non signé de 8 bits.
+- Pour dessiner les fruits, on additionne 1 au niveau.
+  - 3 situations possibles;
+    - Niveau 7 ou moins;
+    - Niveau plus de 8;
+    - Niveau plus de 19.
+
+## PAC-MAN {background-color="black"}
+
+- Au niveau 256 (compteur de niveau 255), le jeu incrémente le compteur *fruits*.
+- Le compteur *fruits* est maintenant égal à 0, ce qui n'était pas prévu.
+- ET crois être dans la situation *7 ou moins*.
+- À chaque fois qu'on dessine un fruit, on enlève 1 au compteur *fruits*, jusqu'à ce qu'on arrive à 0.
+- Le compteur *fruits* est maintenant égal à 255 et on dessine des fruits jusqu'à atteindre 0.
+
+## {background-color="black"}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](pacman_256.gif)
+:::
+
+::: {.column width="50%"}
+- Niveau 255;
+
+- Ajoute 1 au compteur pour arriver au compteur fruits 256;
+
+- Débordement; compteur fruits 0;
+
+- Fruits; niveau moins 1; donc 255;
+
+- Dessiner 255 fruits; corruption du labyrinthe (il est prévu de dessiner au maximum 7 fruits).
+:::
+
+::::
+
+# Les trains en Suisse {background-color="black" background-position="center"}
+
+## 256 essieus... non merci
+
+- Pour garder le compte des trains sur le réseau ferroviaire suisse, des détecteurs sont placés sur les rails.
+
+- Ces détecteurs comptent le nombre d'essieus de chaque train.
+
+- Ils utilisent un entier non signé sur 8 bits.
+
+- Si un train avait exactement 256 essieus, le compteur retournerait à zéro, et ce train deviendrait indétectable... un train *fantôme*.
+
+##
+
+![](swiss_train.PNG)
+
+. . .
+
+> *Le passage précédent se traduit par "Pour éviter de faussement signaler une section de rails comme étant vide, en remettant le compteur à zéro, le nombre total d'essieus d'un train ne doit pas être égal à 256".*
+
+# Therac-25 {background-color="black"}
+
+# {background-image="https://hackaday.com/wp-content/uploads/2015/10/thearc.jpg?w=800"
+backgroud-size="contain"
 background-color="black"}
 
-## Le niveau 256
+## Therac-25
 
-- Le compteur de niveau du Pac-Man original est emmagasiné dans un entier à huit bits. 
+- Therac-25 était le nom d'une machine de radiothérapie développée conjointement par l'Énergie atomique du Canada Limitée et CGR MeV.
 
-- La valeur maximale est donc 255.
+- Entre 1985 et 1987, le Therac-25 fut impliqué dans au moins six accidents durant lesquels des patients reçurent des doses massives de radiation, parfois de l'ordre de plusieurs centaines de grays. 
 
-- Le compteur de niveau débute à 0. Pour calculer le compteur de fruits, il ajoute 1.
+- Au moins cinq patients décédèrent des suites de l'irradiation.
 
-- En raison du débordement, ajouter 1 à 255 donne 0, et le jeu esssaie de dessiner 256 fruits à l'écran jusqu'à qu'il déborde à 0.
+## Gray (unité)
 
-- Le résultat est le chaos apparent sur la partie droite du labyrinthe, car la mémoire débute par le bas, suivi par les colonnes du côté droit.
+- Un gray (Gy) représente l'énergie d'un rayonnement ionisant apportant une énergie d'un joule à un milieu homogène d'une masse d'un kilogramme.
+
+. . .
+
+| **Doses** |             **Effets**            |
+|:---------:|:----------------------------------|
+|   20 Gy   | Mort instantanée                  |
+|   10 Gy   | Mort pratiquement certaine        |
+|    5 Gy   | Dose tuant 50% des sujets exposés |
+
+:  {.striped .hover}
+
+## Therac-25
+
+- La machine ne possédait pas de dispositif physique pour bloquer le flux d'électrons en mode « haute énergie » si la cible n'était pas en place.
+
+- Le logiciel utilisait un fanion sur 8 bits et l'incrémentait. 
+
+- Des dépassements de capacité se produisaient et engendraient la désactivation de certains tests de sécurité.
+
+# Les entiers signés {background-color="black" background-position="center"}
+
+## Entiers signés
+
+::: {.callout-note}
+## Entiers signés
+
+La représentation binaire signée sur $n$ bits d’un entier est le train de bit où le premier bit de gauche représente le signe (**positif** si le bit est 0 et **négatif** si le bit est 1), et où les $n-1$ bits restants représentent l'écriture de $|x|$ en base 2.
+
+:::
+
+. . .
+
+Par exemple sur huit bits:
+
+. . .
+
+```{r engine='tikz'}
+\usetikzlibrary{matrix}
+\begin{tikzpicture}
+
+\tikzstyle{signe}=[
+                        draw, 
+                        very thick, 
+                        fill=red!20!white
+                    ]
+
+\tikzstyle{exposant}=[
+                        draw, 
+                        very thick, 
+                        fill=green!20!white
+                    ]
+
+\matrix [column sep=0cm, row sep = 0.1cm]
+{
+    \node (a-7) [signe] {0};
+  & \node (a-6) [exposant] {1};
+  & \node (a-5) [exposant] {0};
+  & \node (a-4) [exposant] {0};
+  & \node (a-3) [exposant] {1};
+  & \node (a-2) [exposant] {1};
+  & \node (a-1) [exposant] {0};
+  & \node (a-0) [exposant] {0};
+\\
+};
+
+\foreach \i in {0,1,...,6}{
+    \node[below] at ([shift=({0cm,-0.01cm})]a-\i.south) {\tiny{$2^\i$}};
+}
+
+\node[below, red] at ([shift=({0cm,-0.06cm})]a-7.south) {\tiny{signe}};
+\node[right] at ([shift=({0.01cm,0cm})]a-0.east) {$=76$};
+
+\end{tikzpicture}
+```
+
+## Entiers signés
+
+::: {.callout-note}
+## Entiers signés
+
+La représentation binaire signée sur $n$ bits d’un entier est le train de bit où le premier bit de gauche représente le signe (**positif** si le bit est 0 et **négatif** si le bit est 1), et où les $n-1$ bits restants représentent l'écriture de $|x|$ en base 2.
+
+:::
+
+Par exemple sur huit bits:
+
+```{r engine='tikz'}
+\usetikzlibrary{matrix}
+\begin{tikzpicture}
+
+\tikzstyle{signe}=[
+                        draw, 
+                        very thick, 
+                        fill=red!20!white
+                    ]
+
+\tikzstyle{exposant}=[
+                        draw, 
+                        very thick, 
+                        fill=green!20!white
+                    ]
+
+\matrix [column sep=0cm, row sep = 0.1cm]
+{
+    \node (a-7) [signe] {1};
+  & \node (a-6) [exposant] {1};
+  & \node (a-5) [exposant] {0};
+  & \node (a-4) [exposant] {0};
+  & \node (a-3) [exposant] {1};
+  & \node (a-2) [exposant] {1};
+  & \node (a-1) [exposant] {0};
+  & \node (a-0) [exposant] {0};
+\\
+};
+
+\foreach \i in {0,1,...,6}{
+    \node[below] at ([shift=({0cm,-0.01cm})]a-\i.south) {\tiny{$2^\i$}};
+}
+
+\node[below, red] at ([shift=({0cm,-0.06cm})]a-7.south) {\tiny{signe}};
+\node[right] at ([shift=({0.01cm,0cm})]a-0.east) {$=-76$};
+
+\end{tikzpicture}
+```
+
+## Entiers signés
+
+\begin{gather}
+\text{Entier maximal} =  2^{n-1}-1 \\
+\text{Entier minimal} =  -(2^{n-1}-1)
+\end{gather}
+
+. . .
+
+Par exemple, en utilisant 8 bits:
+
+```{r engine='tikz'}
+\usetikzlibrary{matrix}
+\begin{tikzpicture}
+
+\tikzstyle{signe}=[
+                        draw, 
+                        very thick, 
+                        fill=red!20!white
+                    ]
+
+\tikzstyle{exposant}=[
+                        draw, 
+                        very thick, 
+                        fill=green!20!white
+                    ]
+
+\matrix [column sep=0cm, row sep = 0.1cm]
+{
+    \node (a-7) [signe] {0};
+  & \node (a-6) [exposant] {1};
+  & \node (a-5) [exposant] {1};
+  & \node (a-4) [exposant] {1};
+  & \node (a-3) [exposant] {1};
+  & \node (a-2) [exposant] {1};
+  & \node (a-1) [exposant] {1};
+  & \node (a-0) [exposant] {1};
+\\
+};
+
+\foreach \i in {0,1,...,6}{
+    \node[below] at ([shift=({0cm,-0.01cm})]a-\i.south) {\tiny{$2^\i$}};
+}
+
+\node[below, red] at ([shift=({0cm,-0.06cm})]a-7.south) {\tiny{signe}};
+\node[right] at ([shift=({0.01cm,0cm})]a-0.east) {$=127$};
+
+\end{tikzpicture}
+```
+
+## Entiers signés
+
+\begin{gather}
+\text{Entier maximal} =  2^{n-1}-1 \\
+\text{Entier minimal} =  -(2^{n-1}-1)
+\end{gather}
+
+Par exemple, en utilisant 8 bits:
+
+```{r engine='tikz'}
+\usetikzlibrary{matrix}
+\begin{tikzpicture}
+
+\tikzstyle{signe}=[
+                        draw, 
+                        very thick, 
+                        fill=red!20!white
+                    ]
+
+\tikzstyle{exposant}=[
+                        draw, 
+                        very thick, 
+                        fill=green!20!white
+                    ]
+
+\matrix [column sep=0cm, row sep = 0.1cm]
+{
+    \node (a-7) [signe] {1};
+  & \node (a-6) [exposant] {1};
+  & \node (a-5) [exposant] {1};
+  & \node (a-4) [exposant] {1};
+  & \node (a-3) [exposant] {1};
+  & \node (a-2) [exposant] {1};
+  & \node (a-1) [exposant] {1};
+  & \node (a-0) [exposant] {1};
+\\
+};
+
+\foreach \i in {0,1,...,6}{
+    \node[below] at ([shift=({0cm,-0.01cm})]a-\i.south) {\tiny{$2^\i$}};
+}
+
+\node[below, red] at ([shift=({0cm,-0.06cm})]a-7.south) {\tiny{signe}};
+\node[right] at ([shift=({0.01cm,0cm})]a-0.east) {$=-127$};
+
+\end{tikzpicture}
+```
+
+## Entiers signés
+
+|         | Nombre de bits | Minimum                     | Maximum                   |
+|---------|----------------|-----------------------------|---------------------------|
+| `int8`  | 8              | -127                        | 127                       |
+| `int16` | 16             | -32 767                     | 32 767                    |
+| `int32` | 32             | -2 147 483 647              | 2 147 483 647             |
+| `int64` | 64             | -9 223 372 036 854 775 807  | 9 223 372 036 854 775 807 |
+
+## Problème... pas trop grave
+
+- Nous avons maintenant deux zéros:
+
+. . .
+
+```{r engine='tikz'}
+\usetikzlibrary{matrix}
+\begin{tikzpicture}
+
+\tikzstyle{signe}=[
+                        draw, 
+                        very thick, 
+                        fill=red!20!white
+                    ]
+
+\tikzstyle{exposant}=[
+                        draw, 
+                        very thick, 
+                        fill=green!20!white
+                    ]
+
+\matrix [column sep=0cm, row sep = 0.1cm]
+{
+    \node (a-7) [signe] {0};
+  & \node (a-6) [exposant] {0};
+  & \node (a-5) [exposant] {0};
+  & \node (a-4) [exposant] {0};
+  & \node (a-3) [exposant] {0};
+  & \node (a-2) [exposant] {0};
+  & \node (a-1) [exposant] {0};
+  & \node (a-0) [exposant] {0};
+\\
+};
+
+\foreach \i in {0,1,...,6}{
+    \node[below] at ([shift=({0cm,-0.01cm})]a-\i.south) {\tiny{$2^\i$}};
+}
+
+\node[below, red] at ([shift=({0cm,-0.06cm})]a-7.south) {\tiny{signe}};
+\node[right] at ([shift=({0.01cm,0cm})]a-0.east) {$=+0$};
+
+\end{tikzpicture}
+```
+
+. . .
+
+```{r engine='tikz'}
+\usetikzlibrary{matrix}
+\begin{tikzpicture}
+
+\tikzstyle{signe}=[
+                        draw, 
+                        very thick, 
+                        fill=red!20!white
+                    ]
+
+\tikzstyle{exposant}=[
+                        draw, 
+                        very thick, 
+                        fill=green!20!white
+                    ]
+
+\matrix [column sep=0cm, row sep = 0.1cm]
+{
+    \node (a-7) [signe] {1};
+  & \node (a-6) [exposant] {0};
+  & \node (a-5) [exposant] {0};
+  & \node (a-4) [exposant] {0};
+  & \node (a-3) [exposant] {0};
+  & \node (a-2) [exposant] {0};
+  & \node (a-1) [exposant] {0};
+  & \node (a-0) [exposant] {0};
+\\
+};
+
+\foreach \i in {0,1,...,6}{
+    \node[below] at ([shift=({0cm,-0.01cm})]a-\i.south) {\tiny{$2^\i$}};
+}
+
+\node[below, red] at ([shift=({0cm,-0.06cm})]a-7.south) {\tiny{signe}};
+\node[right] at ([shift=({0.01cm,0cm})]a-0.east) {$=-0$};
+
+\end{tikzpicture}
+```
+
+## Problème... plus grave
+
+- On brise l'addition binaire.
+
+. . .
+
+```{r engine='tikz'}
+#| out-width: 70%
+#| fig-align: center
+
+\usetikzlibrary{matrix}
+\begin{tikzpicture}
+\tikzstyle{signe}=[
+                        draw, 
+                        very thick, 
+                        fill=red!20!white
+                    ]
+
+\tikzstyle{exposant}=[
+                        draw, 
+                        very thick, 
+                        fill=green!20!white
+                    ]
+
+\matrix [column sep=0cm, row sep = 0.1cm]
+{
+	\node (a-7) [signe] {0};
+  &	\node (a-6) [exposant] {1};
+  &	\node (a-5) [exposant] {0};
+  &	\node (a-4) [exposant] {0};
+  &	\node (a-3) [exposant] {1};
+  &	\node (a-2) [exposant] {1};
+  &	\node (a-1) [exposant] {0};
+  &	\node (a-0) [exposant] {0}; \\
+
+	\node (b-7) [signe] {1};
+  &	\node (b-6) [exposant] {0};
+  &	\node (b-5) [exposant] {0};
+  &	\node (b-4) [exposant] {1};
+  &	\node (b-3) [exposant] {1};
+  &	\node (b-2) [exposant] {0};
+  &	\node (b-1) [exposant] {0};
+  &	\node (b-0) [exposant] {0}; \\
+
+	\node (c-7) [signe] {1};
+  &	\node (c-6) [exposant] {1};
+  &	\node (c-5) [exposant] {1};
+  &	\node (c-4) [exposant] {0};
+  &	\node (c-3) [exposant] {0};
+  &	\node (c-2) [exposant] {1};
+  &	\node (c-1) [exposant] {0};
+  &	\node (c-0) [exposant] {0};
+ \\
+};
+
+\node at ([shift=({0.5cm,0})]a-0.east) {=+76};
+\node at ([shift=({0.4cm,0})]b-0.east) {=-24};
+\node at ([shift=({0.48cm,0})]c-0.east) {=-100};
+
+\node at ([shift=({-0.4cm,0})]b-7) {+};
+\draw ([shift=({-0.4cm,-0.05cm})]b-7.south) -- ([shift=({0.4cm,-0.05cm})]b-0.south);
+\node[above] at (a-4.north) {1};
+\node[above] at (a-5.north) {1};
+
+\foreach \i in {0,1,...,6}{
+    \node[below] at ([shift=({0cm,-0.01cm})]c-\i.south) {\tiny{$2^\i$}};
+}
+
+\node[below, red] at ([shift=({0cm,-0.06cm})]c-7.south) {\tiny{signe}};
+
+\end{tikzpicture}
+```
+
+. . .
+
+La bonne réponse est 52!!!
+
+## Le complément à deux
+
+- Les **nombres positifs** sont représentés de manière usuelle.
+
+- Les **nombres négatifs** sont obtenus en calculant l'opposé du nombre positif par deux opérations successives:
+
+  - On inverse les bits de l'écriture binaire (les 0 deviennents des 1 et vice-versa);
+  
+  - On ajoute 1 au résultat (les dépassements sont ignorés).
+  
+. . .
+
+Cette opération correspond au calcul de $2^n-|x|$.
+
+## Le complément à deux
+
+```{r engine='tikz'}
+\usetikzlibrary{matrix}
+\begin{tikzpicture}
+\tikzstyle{signe}=[
+                        draw, 
+                        very thick, 
+                        fill=red!20!white
+                    ]
+
+\tikzstyle{exposant}=[
+                        draw, 
+                        very thick, 
+                        fill=green!20!white
+                    ]
+
+\matrix [column sep=0cm, row sep = 0.1cm]
+{
+	\node (a-7) [signe] {0};
+  &	\node (a-6) [exposant] {1};
+  &	\node (a-5) [exposant] {0};
+  &	\node (a-4) [exposant] {0};
+  &	\node (a-3) [exposant] {1};
+  &	\node (a-2) [exposant] {1};
+  &	\node (a-1) [exposant] {0};
+  &	\node (a-0) [exposant] {0}; \\ [0.4cm]
+
+	\node (b-7) [signe] {1};
+  &	\node (b-6) [exposant] {0};
+  &	\node (b-5) [exposant] {1};
+  &	\node (b-4) [exposant] {1};
+  &	\node (b-3) [exposant] {0};
+  &	\node (b-2) [exposant] {0};
+  &	\node (b-1) [exposant] {1};
+  &	\node (b-0) [exposant] {1}; \\
+
+    \node (c-7)  {};
+  &	\node (c-6)  {};
+  &	\node (c-5)  {};
+  &	\node (c-4)  {};
+  &	\node (c-3)  {};
+  &	\node (c-2)  {};
+  &	\node (c-1)  {};
+  &	\node (c-0)  {1}; \\
+
+    \node (d-7) [signe] {1};
+  & \node (d-6) [exposant] {0};
+  & \node (d-5) [exposant] {1};
+  & \node (d-4) [exposant] {1};
+  & \node (d-3) [exposant] {0};
+  & \node (d-2) [exposant] {1};
+  & \node (d-1) [exposant] {0};
+  & \node (d-0) [exposant] {0}; \\
+};
+
+\draw[->, very thick, blue] (a-7.west) to[out=180,in=180] (b-7.west);
+\node[left, blue] at ([shift=({-0.4cm,-0.45cm})]a-7.west) {Inversion des bits};
+
+\node at ([shift=({0.5cm,0})]a-0.east) {=+76};
+\node at ([shift=({0.4cm,0})]d-0.east) {=-76};
+
+\node at ([shift=({-0.5cm,0})]c-7) {+};
+\draw ([shift=({-0.4cm,0.05cm})]d-7.north) -- ([shift=({0.4cm,0.05cm})]d-0.north);
+\node[above] at (b-1.north) {\small 1};
+\node[above] at (b-2.north) {\small 1};
+
+\end{tikzpicture}
+```
+
+## Le complément à deux
+
+```{r engine='tikz'}
+\usetikzlibrary{matrix}
+\begin{tikzpicture}
+\tikzstyle{signe}=[
+                        draw, 
+                        very thick, 
+                        fill=red!20!white
+                    ]
+
+\tikzstyle{exposant}=[
+                        draw, 
+                        very thick, 
+                        fill=green!20!white
+                    ]
+
+\matrix [column sep=0cm, row sep = 0.1cm]
+{
+    \node (a-7) [signe] {0};
+  & \node (a-6) [exposant] {1};
+  & \node (a-5) [exposant] {0};
+  & \node (a-4) [exposant] {0};
+  & \node (a-3) [exposant] {1};
+  & \node (a-2) [exposant] {1};
+  & \node (a-1) [exposant] {0};
+  & \node (a-0) [exposant] {0}; \\
+
+    \node (b-7) [signe] {1};
+  & \node (b-6) [exposant] {0};
+  & \node (b-5) [exposant] {1};
+  & \node (b-4) [exposant] {1};
+  & \node (b-3) [exposant] {0};
+  & \node (b-2) [exposant] {1};
+  & \node (b-1) [exposant] {0};
+  & \node (b-0) [exposant] {0}; \\
+
+    \node (c-7) [signe] {0};
+  & \node (c-6) [exposant] {0};
+  & \node (c-5) [exposant] {0};
+  & \node (c-4) [exposant] {0};
+  & \node (c-3) [exposant] {0};
+  & \node (c-2) [exposant] {0};
+  & \node (c-1) [exposant] {0};
+  & \node (c-0) [exposant] {0};
+ \\
+};
+
+\node at ([shift=({0.5cm,0})]a-0.east) {=+76};
+\node at ([shift=({0.4cm,0})]b-0.east) {=-76};
+\node at ([shift=({0.25cm,0})]c-0.east) {=0};
+
+\node[above] at (a-3.north) {\small 1};
+\node[above] at (a-4.north) {\small 1};
+\node[above] at (a-5.north) {\small 1};
+\node[above] at (a-6.north) {\small 1};
+\node[above] at (a-7.north) {\small 1};
+
+\node (plus) at ([shift=({-0.4cm,0})]b-7) {+};
+\node at ([shift=({0cm,0.83cm})]plus.north) {\small 1};
+\draw ([shift=({-0.4cm,-0.05cm})]b-7.south) -- ([shift=({0.4cm,-0.05cm})]b-0.south);
+
+\end{tikzpicture}
+```
+
+## Débordement
+
+- Contrairement aux entiers non signés, le débordement focntionne différemment avec les entiers signés, en raison du complément à deux.
+
+. . .
+
+```{python}
+#| echo: true
+import numpy as np
+
+a = np.array(127).astype('int8')
+b = np.array(1).astype('int8')
+print(a, b, a + b)
+```
+
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+
+print("Valeur réelle", "Valeur non signée".rjust(20))
+for i in range(253, 259):
+  num = np.array(i).astype('int8')
+  print(f"{i:8,.0f}", f"{num:17,.0f}")
+```
+
+## 
+
+![](https://contentstatic.techgig.com/photo/83117460.cms)
+
+## Extra, Extra - Read All About It: Nearly All Binary Searches and Mergesorts are Broken
+
+- [Extra, Extra - Read All About It: Nearly All Binary Searches and Mergesorts are Broken](https://blog.research.google/2006/06/extra-extra-read-all-about-it-nearly.html)
+
+- Une erreur dans le code pour la routine `binarySearch` est restée introuvable durant neuf ans.
+
+## Le bogue
+
+```{.java code-line-numbers="|6"}
+public static int binarySearch(int[] a, int key) {
+        int low = 0;
+        int high = a.length - 1;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            int midVal = a[mid];
+
+            if (midVal < key)
+                low = mid + 1
+            else if (midVal > key)
+                high = mid - 1;
+            else
+                return mid; // key found
+        }
+        return -(low + 1);  // key not found.
+    }
+```
+
+## Le bogue
+
+```{.java code-line-numbers="false"}
+int mid = (low + high) / 2;
+```
+
+- Les entiers dans `Java` sont codés sur 32 bits.
+
+- Le bug apparaît si la somme de `low` et `high` est plus grande que la valeur maximum possible pour un entier dans `Java`, $2^{31}-1$. 
+
+- La somme déborde en une valeur **négative**, et la valeur reste négative lorsque divisée par deux.
+
+- Le bogue peut apparaître pour des vecteurs de longueurs (en nombre d'éléments) $2^{30}$ ou plus (environ un milliard d'éléments). De tels vecteurs étaient impensable dans les années 1980 lorsque le code a été écrit.
+
+## Le bogue
+
+```{.java code-line-numbers="false"}
+int mid = (low + high) / 2;
+```
+
+- En tentant de répliquer le bogue en `Python`:
+
+. . .
+
+```{python}
+#| echo: true
+import numpy as np
+import random
+
+low = np.array(random.randint(2**30, 2**31)).astype('int32')
+high = np.array(random.randint(2**30, 2**31)).astype('int32')
+print(low, high, (low + high) / 2)
+```
+
+## Le bogue... corrigé
+
+```{.java code-line-numbers="6"}
+public static int binarySearch(int[] a, int key) {
+        int low = 0;
+        int high = a.length - 1;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            int midVal = a[mid];
+
+            if (midVal < key)
+                low = mid + 1
+            else if (midVal > key)
+                high = mid - 1;
+            else
+                return mid; // key found
+        }
+        return -(low + 1);  // key not found.
+    }
+```
+
+## Le bogue... corrigé
+
+```{.java code-line-numbers="6"}
+public static int binarySearch(int[] a, int key) {
+        int low = 0;
+        int high = a.length - 1;
+
+        while (low <= high) {
+            int mid = low + ((high - low) / 2);
+            int midVal = a[mid];
+
+            if (midVal < key)
+                low = mid + 1
+            else if (midVal > key)
+                high = mid - 1;
+            else
+                return mid; // key found
+        }
+        return -(low + 1);  // key not found.
+    }
+```
+
+## Le bogue... corrigé
+
+```{.java code-line-numbers="false"}
+int mid = low + ((high - low) / 2);
+```
+
+- En `Python`:
+
+. . .
+
+```{python}
+#| echo: true
+import numpy as np
+import random
+
+low = np.array(random.randint(2**30, 2**31)).astype('int32')
+high = np.array(random.randint(2**30, 2**31)).astype('int32')
+print(low, high, low +  (high - low) / 2)
+```
+
+# Après le bug de l'an 2000 {background-color="black" background-position="center"}
+
+. . .
+
+celui de l'an 2038
+
+## La représentation POSIX du temps
+
+- Le nombre de secondes écoulées depuis le 1er janvier 1970 00:00:00 UTC, hors secondes intercalaires.
+
+- Une seconde intercalaire, est un procédé employé pour ajuster le temps universel coordonné (UTC), au temps solaire.
+
+- Sur les ordinateurs fonctionnant en 32 bits, la plupart des systèmes d'exploitation concernés représentent ce nombre comme un nombre entier signé de 32 bits, ce qui limite le nombre de secondes à $2^{31}-1$.
+
+## La représentation POSIX du temps
+
+- $2^{31}-1$ secondes correspond à 2 147 483 647 secondes.
+
+- Ce nombre sera atteint le 19 janvier 2038 à 3 h 14 min 7 s (UTC).
+
+- La seconde suivante, représente −2 147 483 648 en complément à deux, soit plus de 2 milliards de secondes avant 1970, le 13 décembre 1901 à 20 h 45 min 52 s pour être précis.
+
+## La représentation POSIX du temps
+
+![](https://upload.wikimedia.org/wikipedia/commons/e/e9/Year_2038_problem.gif)
+
+## La représentation POSIX du temps
+
+- La solution est de passer à un horodatage sur 64 bits.
+
+- La date butoir se retrouverait le dimanche 4 décembre 292 277 026 596 après J.-C. à 15 h 30 min 8 s.
+
+- Environ 21 fois l'âge de l'univers.
+
+# {background-image="boeing_787.jpg" background-size="contain" background-color=rgba(82,129,175)}
+
+## Désolé pour les gens souffrant d'aviophobie... {background-color="black"}
+
+![](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnVpcmM5N3JuZzZmYnlxaXhzMXM5a2hoNmZwaHBqbDFjbTVxb3lpbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AkHo4NUqzvhn9NBluB/giphy.gif)
+
+##
+
+. . .
+
+> "To keep a Boeing Dreamliner flying, reboot once every 248 days."
+
+. . .
+
+> "... a Model 787 airplane that has been powered continuously for 248 days can lose all alternating current (AC) electrical power due to the generator control units (GCUs) simultaneously going into failsafe mode,"
+
+. . .
+
+> "This condition is caused by a software counter internal to the GCUs that will overflow after 248 days of continuous power. We are issuing this AD to prevent loss of all AC electrical power, which could result in loss of control of the airplane."
+
+## Boeing Dreamliner
+
+- Le temps écoulé depuis le démarrage du système est compté en centièmes de secondes.
+
+- Ce temps est stocké dans un entier signé de 32 bits.
+
+- Le nombre maximal possible est $2^{31}-1$ centièmes de secondes.
+
+- Ça correspond à $\frac{2^{31}-1}{100 \cdot 60 \cdot 60 \cdot 24}=$ `{r} (2^(31)-1)/100/3600/24` jours...
+
+# Nombres à virgule (nombres décimaux) {background-color="black"}
+
+# Virgule fixe {background-color="black"}
+
+## Virgule fixe
+
+```{r engine="tikz"}
+\usetikzlibrary{calc, decorations.pathreplacing}
+\begin{tikzpicture}
+
+\tikzstyle{signe}=[
+                        draw, 
+                        very thick, 
+                        fill=red!20!white
+                    ]
+
+\tikzstyle{entier}=[
+                        draw, 
+                        very thick, 
+                        fill=green!20!white,
+                        text width = 2cm, 
+                        align = center
+                    ]
+
+\tikzstyle{fraction}=[
+                        draw, 
+                        very thick, 
+                        fill=blue!20!white,
+                        text width = 2cm, 
+                        align = center
+                    ]                   
+
+\matrix [column sep=0.1cm]
+{
+\node (s) [signe] {1 bit}; 
+& \node (e) [entier] {E bits};
+&[0.2cm] \node (m) [fraction] {F bits}; \\
+};
+
+\draw [decoration={brace,mirror}, decorate] ([shift=({0cm,-0.1cm})]s.south west) -- node [midway, below, text width = 1cm, align = center] {partie entière} ([shift=({0cm,-0.1cm})]e.south east);
+
+\draw [decoration={brace}, decorate] ([shift=({0cm,0.1cm})]m.north west) -- node [midway, above, text width = 2cm, align = center] {partie fractionnaire} ([shift=({0cm,0.1cm})]m.north east);
+
+\draw [decoration={brace}, decorate] ([shift=({0cm,0.1cm})]s.north west) -- node [midway, above, text width = 1cm, align = center] {bit de signe} ([shift=({0cm,0.1cm})]s.north east);
+
+\node (radix) at ($(e)!0.5!(m)$) {};
+\draw[fill=black] (radix) circle (1pt);
+\draw[<-] (radix)--++(0,1.3) node[above] {virgule décimale implicite};
+
+\end{tikzpicture}
+```
+
+## Quelques exemples
+
+- Le format `TrueType` de fonte numérique utilise un nombre signé à virgule fixe de 32 bits, avec 26 bits pour la partie entière.
+
+- Le premier `Playstation` utilisait un nombre à virgule fixe de 16 bits, avec 12 bits pour la partie fractionnaire.
+
+- $\LaTeX$ utilise un nombre à virgule fixe signé de 32 bits, avec 16 bits pour la partie fractionnaire, pour calculer les positions des objets. Pour les fontes, $\LaTeX$ utilise un nombre à virgule fixe signé de 32 bits, avec 12 bits pour la partie fractionnaire.
+
+# La bourse de Vancouver {background-color="black"}
+
+## La bourse de Vancouver
+
+- En janvier 1982, l'index *VSE* de la bourse de Vancouver est initialisé à une valeur de 1 000$.
+- Après 23 mois, l'index est à une valeur de 524,811$, malgré le fait que les volumes de ventes battaient des records.
+- Le lundi suivant, l'indice est mystérieusement passé à une valeur de 1 098,892$.
+
+## La bourse de Vancouver
+
+- La valeur de l'index est stocké dans nombre à virgule fixe avec 3 chiffres après la virgule.
+- Les calculs se font avec 4 chiffres après la virgule, mais les décimales sont **tronquées** plutôt qu'**arrondies**.
+- On fait ces calculs environ 3 000 fois durant une journée.
+- Après 23 mois, la valeur réelle devait être de 1 098,892\$, mais était plutôt de 524,811\$.
+
+# Missiles Patriot {background-color="black"}
+
+## {background-image="https://media1.ledevoir.com/images_galerie/nwd_1496480_1151758/image.jpg"
+background-color="black"
+background-size="contain"}
+
+## Missiles Patriot
+
+- Le 25 février 1991, un Scud irakien frappait les casernes de Dhahran, en Arabie saoudite, tuant 28 soldats du centre de commandement du 14e détachement de l'armée des États-Unis.
+
+- Une recherche gouvernementale a indiqué que l'interception manquée de Dharan avait été provoquée par une erreur de logiciel dans son système de coordination.
+
+- La batterie de missiles Patriot de Dharan se trouvait alors en fonction depuis plus de 100 heures or, avec le temps, des erreurs apparaissaient dans le système et décalaient la position perçue de la cible avec sa position réelle.
+
+## Missiles Patriot
+
+- Le temps était mesuré en dixièmes $\left(\frac{1}{10}\right)$ de secondes.
+
+- Le temps était conservé dans un nombre à virgule fixe, avec 23 bits pour la partie fractionnaire.
+
+- Malheureusement, $\frac{1}{10}$ a une représentation infinie en binaire.
+
+. . .
+
+$$
+\frac{1}{10} = \frac{3}{32}\sum_{k=0}^{\infty} \left( \frac{1}{16} \right)^k = 0,0\ 0011\ 0011\ 0011\ 0011\ \ldots
+$$
+
+## Missiles Patriot
+
+- Puisque l'entier ne peut contenir que 23 bits dans la partie fractionnaire, l'erreur à chaque dixième de seconde est :
+
+. . .
+
+\begin{aligned}
+\frac{3}{32}\sum_{k=5}^{\infty} \left( \frac{1}{16} \right)^k &= \frac{3}{32} \cdot \frac{1/16^5}{1-1/16} \\
+&= \frac{1}{10 \cdot 16^5} \\
+&\approx 0,0000\ 0009\ 5 
+\end{aligned}
+
+. . .
+
+Après 100 heures, nous avons une erreur de:
+
+$$
+0,000000098\cdot 10\cdot 100\cdot 60\cdot 60 \approx 0,342\ \text{secondes}
+$$
+
+## Missiles Patriot
+
+- Les missiles Scud que les Patriot devaient intercepter voyageaient à une vitesse de 1 676 mètres par secondes...
+
+- Ils parcouraient donc environ 573 mètres durant le laps de temps de l'erreur. 
+
+- Les Scud étaient détectés, mais les Patriot les rataient.
+
+# Virgule flottante {background-color="black"}
+
+## Représentation normalisée
+
+- En décimal, nous avons:
+
+. . .
+
+$$
++13,254 = \underbrace{+}_{\text{signe}} 0,\underbrace{13254}_{\text{mantisse}} \times 10^{\overbrace{{2}}^{\text{exposant}}}
+$$
+
+## Représentation normalisée
+
+::: {.nonincremental}
+- Par contre, en binaire, nous avons:
+:::
+
+. . .
+
+$$
++10,101 = \underbrace{+}_{\text{signe}} \overbrace{1}^{\text{toujours}\ 1},\underbrace{0101}_{\text{mantisse}} \times 2^{\overbrace{{1}}^{\text{exposant}}}
+$$
+
+- Le premier 1 est implicite et n'a pas besoin d'être stocké. 
+
+## La norme IEEE 754
+
+```{r engine='tikz'}
+
+\usetikzlibrary{decorations.pathreplacing}
+\begin{tikzpicture}
+
+\tikzstyle{signe}=[
+                        draw, 
+                        very thick, 
+                        fill=red!20!white
+                    ]
+
+\tikzstyle{exposant}=[
+                        draw, 
+                        very thick, 
+                        fill=green!20!white,
+                        text width = 2cm, 
+                        align = center
+                    ]
+
+\tikzstyle{mantisse}=[
+                        draw, 
+                        very thick, 
+                        fill=blue!20!white,
+                        text width = 2cm, 
+                        align = center
+                    ]   
+
+\matrix [column sep=0cm]
+{
+\node (s) [signe] {S}; 
+& \node (e) [exposant] {E}; 
+& \node (m) [mantisse] {M}; \\
+};
 
 
 
+\draw [decoration={brace,mirror}, decorate] ([shift=({0cm,-0.1cm})]e.south west) -- node [midway, below, text width = 1cm, align = center] {exposant $e$ bits} ([shift=({0cm,-0.1cm})]e.south east);
+
+\draw [decoration={brace}, decorate] ([shift=({0cm,0.1cm})]m.north west) -- node [midway, above, text width = 1cm, align = center] {mantisse $m$ bits} ([shift=({0cm,0.1cm})]m.north east);
+
+\draw [decoration={brace}, decorate] ([shift=({0cm,0.1cm})]s.north west) -- node [midway, above, text width = 1cm, align = center] {bit de signe} ([shift=({0cm,0.1cm})]s.north east);
+
+\end{tikzpicture}
+```
+
+## La norme IEEE 754
+
+- 1 bit pour le signe $S$
+- $e$ bits pour l'exposant $E$ biaisé (pour trouver l'exposant réel, il faut soustraire une valeur (le biais) à celle stockée.)
+- $m$ bits pour la mantisse $M$
+
+. . .
+
+Un nombre flottant normalisé a une valeur $N$ donnée par la formule suivante:
+$$
+N = S \times 2^{E-\text{BIAIS}} \times \left(1+\frac{M}{2^m}\right)
+$$
+
+## Le format double précision
+
+- 1 bit pour le signe $S$
+- 11 bits pour l'exposant $E$ biaisé (biais de 1 023)
+- 52 bits pour la mantisse $M$
+
+. . .
+
+Le nombre maximum représentable est :
+
+. . .
+
+$$
+1,7976931348623157 × 10^{308}
+$$
+
+# Ariane 5 {background-color="black"}
+
+# 
+
+<iframe width="1050" height="700" src="https://www.youtube.com/embed/N6PWATvLQCY?si=kkcboVm0QZ0cqMBh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+## Ariane 5
 
 
-
-
-
+Le bug qui a causé la mise hors service des systèmes de guidage-pilotage à centrales inertielles est causé par la procédure d'étalonnage de l'appareil. Dans un usage normal, cet étalonnage s'effectue au sol et mesure donc de très faibles valeurs d'accélération puisque la fusée est immobile. Pour ce faire, le logiciel transcrit les mesures d’accélérations horizontale et verticale (des flottants codés sur 64 bits) en entiers signés codés sur 16 bits. Or, le programme Ariane 4 a fait le choix de laisser l'appareil en mode calibrage une quarantaine de secondes2 après le décollage. Ce choix qui date du début du programme Ariane, plus de dix ans avant l'accident, était motivé par le fait que sur les premières fusées Ariane, en cas de report du décollage, il était nécessaire de relancer la procédure de calibrage, qui durait plus de 45 minutes. Cette fonctionnalité, héritée d'Ariane 4 n'a plus d'utilité pour Ariane 5 et a parasité son système de navigation inertielle.
