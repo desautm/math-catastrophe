@@ -5,6 +5,8 @@ author: "Marc-André Désautels"
 format: 
   revealjs:
     incremental: true
+    logo: logo-cegep.jpg
+    footer: "desautm.github.io/math-catastrophe"
 editor: visual
 title-slide-attributes:
   data-background-color: "black"
