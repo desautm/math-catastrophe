@@ -1,6 +1,6 @@
 ---
-title: "FAIL"
-subtitle: "... quand les mathématiques s'effondrent"
+title: "Les machines perdent le Nord"
+subtitle: "... quand l'informatique s'emmêle les bits"
 author: "Marc-André Désautels"
 format: 
   revealjs:
@@ -12,15 +12,7 @@ execute:
   cache: true
 ---
 
-# Les erreurs graphiques {background-color="black" background-position="center"}
-
-# Les erreurs de systèmes de mesures {background-color="black" background-position="center"}
-
-# Les erreurs par omission {background-color="black" background-position="center"}
-
 ##  {background-image="https://www.cs.cornell.edu/~hweather/FaultTolerance/HW1/y2k_checklist.gif" background-size="contain"}
-
-# Les erreurs de débordement {.center}
 
 # La représentation des nombres {background-color="black"}
 
