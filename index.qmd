@@ -14,9 +14,15 @@ execute:
 
 # Les erreurs graphiques {background-color="black" background-position="center"}
 
+# Les erreurs de systèmes de mesures {background-color="black" background-position="center"}
+
+# Les erreurs par omission {background-color="black" background-position="center"}
+
 ##  {background-image="https://www.cs.cornell.edu/~hweather/FaultTolerance/HW1/y2k_checklist.gif" background-size="contain"}
 
-# La représentation des nombres {background-color="black" background-position="center"}
+# Les erreurs de débordement {.center}
+
+# La représentation des nombres {background-color="black"}
 
 ## Système de numération
 
@@ -114,7 +120,7 @@ $$
 
 - Dans la majorité des langages informatiques, les trains de bits ont une longueur prédéterminée, qu'il est impossible de dépasser.
 
-# Les entiers non signés {background-color="black" background-position="center"}
+# Les entiers non signés {background-color="black"}
 
 ## Les entiers non signés
 
@@ -345,7 +351,7 @@ for i in range(253, 259):
   print(f"{i:8,.0f}", f"{num:17,.0f}")
 ```
 
-# PAC-MAN {background-color="black" background-position="center"}
+# PAC-MAN {background-color="black"}
 
 ## {background-image="https://media.cnn.com/api/v1/images/stellar/prod/200518114838-05-pac-man-40.jpg?q=w_1110,c_fill/f_webp"
 background-size="contain"
@@ -448,11 +454,11 @@ background-color="black"}
 
 - La machine ne possédait pas de dispositif physique pour bloquer le flux d'électrons en mode « haute énergie » si la cible n'était pas en place.
 
-- Le logiciel utilisait un fanion sur 8 bits et l'incrémentait. 
+- Le logiciel utilisait un fanion sur 8 bits et l'incrémentait, plutôt que d'utiliser un booléen (`True` ou `False`)
 
 - Des dépassements de capacité se produisaient et engendraient la désactivation de certains tests de sécurité.
 
-# Les entiers signés {background-color="black" background-position="center"}
+# Les entiers signés {background-color="black"}
 
 ## Entiers signés
 
@@ -992,13 +998,30 @@ b = np.array(1).astype('int8')
 print(a, b, a + b)
 ```
 
+## Débordement
+
+::: {.nonincremental}
+- Contrairement aux entiers non signés, le débordement focntionne différemment avec les entiers signés, en raison du complément à deux.
+:::
+
 ```{python}
 #| echo: true
+#| eval: false
+import numpy as np
+
+print("Valeur réelle", "Valeur non signée".rjust(20))
+for i in range(125, 131):
+  num = np.array(i).astype('int8')
+  print(f"{i:8,.0f}", f"{num:17,.0f}")
+```
+
+```{python}
+#| echo: false
 #| eval: true
 import numpy as np
 
 print("Valeur réelle", "Valeur non signée".rjust(20))
-for i in range(253, 259):
+for i in range(125, 131):
   num = np.array(i).astype('int8')
   print(f"{i:8,.0f}", f"{num:17,.0f}")
 ```
@@ -1066,7 +1089,7 @@ import random
 
 low = np.array(random.randint(2**30, 2**31)).astype('int32')
 high = np.array(random.randint(2**30, 2**31)).astype('int32')
-print(low, high, (low + high) / 2)
+print(low, high, round((low + high) / 2))
 ```
 
 ## Le bogue... corrigé
@@ -1130,7 +1153,7 @@ import random
 
 low = np.array(random.randint(2**30, 2**31)).astype('int32')
 high = np.array(random.randint(2**30, 2**31)).astype('int32')
-print(low, high, low +  (high - low) / 2)
+print(low, high, round(low + (high - low) / 2))
 ```
 
 # Après le bug de l'an 2000 {background-color="black" background-position="center"}
@@ -1162,6 +1185,8 @@ celui de l'an 2038
 ## La représentation POSIX du temps
 
 - La solution est de passer à un horodatage sur 64 bits.
+
+- Le nombre de secondes possible serait maintenant de $2^{63}-1$, ce qui correspond à 9 223 372 036 854 775 807 secondes!
 
 - La date butoir se retrouverait le dimanche 4 décembre 292 277 026 596 après J.-C. à 15 h 30 min 8 s.
 
@@ -1290,7 +1315,7 @@ background-size="contain"}
 
 - Le temps était mesuré en dixièmes $\left(\frac{1}{10}\right)$ de secondes.
 
-- Le temps était conservé dans un nombre à virgule fixe, avec 23 bits pour la partie fractionnaire.
+- Le temps était conservé dans un nombre à virgule fixe, avec 24 bits pour la partie fractionnaire.
 
 - Malheureusement, $\frac{1}{10}$ a une représentation infinie en binaire.
 
@@ -1302,9 +1327,21 @@ $$
 
 ## Missiles Patriot
 
-- Puisque l'entier ne peut contenir que 23 bits dans la partie fractionnaire, l'erreur à chaque dixième de seconde est :
+- Puisque l'entier ne peut contenir que 24 bits dans la partie fractionnaire, l'erreur à chaque dixième de seconde est donnée par:
 
 . . .
+
+$$
+0,0\ 0011\ 0011\ 0011\ 0011\ 0011\ 00\ldots
+$$
+
+- les chiffres après les trois points.
+
+## Missiles Patriot
+
+::: {.nonincremental}
+- Puisque l'entier ne peut contenir que 24 bits dans la partie fractionnaire, l'erreur à chaque dixième de seconde est donnée par:
+:::
 
 \begin{aligned}
 \frac{3}{32}\sum_{k=5}^{\infty} \left( \frac{1}{16} \right)^k &= \frac{3}{32} \cdot \frac{1/16^5}{1-1/16} \\
@@ -1312,15 +1349,15 @@ $$
 &\approx 0,0000\ 0009\ 5 
 \end{aligned}
 
-. . .
+## Missiles Patriot
 
 Après 100 heures, nous avons une erreur de:
 
-$$
-0,000000098\cdot 10\cdot 100\cdot 60\cdot 60 \approx 0,342\ \text{secondes}
-$$
+. . .
 
-## Missiles Patriot
+$$
+\frac{1}{10 \cdot 16^5} \cdot 10\cdot 100\cdot 60\cdot 60 \approx 0,342\ \text{secondes}
+$$
 
 - Les missiles Scud que les Patriot devaient intercepter voyageaient à une vitesse de 1 676 mètres par secondes...
 
@@ -1438,5 +1475,23 @@ $$
 
 ## Ariane 5
 
+- Le 4 juin 1996, la fusée Ariane 5 explose 40 secondes après son décollage.
+- La fusée en était à son premier voyage et son développement avait coûté 7 milliards de dollars.
+- La cause de l'échec est dûe à une erreur logicielle dans le SRI (Système de Référence Inertielle).
 
-Le bug qui a causé la mise hors service des systèmes de guidage-pilotage à centrales inertielles est causé par la procédure d'étalonnage de l'appareil. Dans un usage normal, cet étalonnage s'effectue au sol et mesure donc de très faibles valeurs d'accélération puisque la fusée est immobile. Pour ce faire, le logiciel transcrit les mesures d’accélérations horizontale et verticale (des flottants codés sur 64 bits) en entiers signés codés sur 16 bits. Or, le programme Ariane 4 a fait le choix de laisser l'appareil en mode calibrage une quarantaine de secondes2 après le décollage. Ce choix qui date du début du programme Ariane, plus de dix ans avant l'accident, était motivé par le fait que sur les premières fusées Ariane, en cas de report du décollage, il était nécessaire de relancer la procédure de calibrage, qui durait plus de 45 minutes. Cette fonctionnalité, héritée d'Ariane 4 n'a plus d'utilité pour Ariane 5 et a parasité son système de navigation inertielle.
+## Ariane 5
+
+- Durant l'étalonnage de l'appareil, on mesure les accélérations horizontales et verticales.
+- Puisque la fusée est immobile, ces valeurs sont petites.
+- On transfère ces mesures (des flottants codés sur 64 bits) en entiers signés codés sur 16 bits.
+- Le maximum sur 64 bits : $1,7976931348623157 × 10^{308}$.
+- Le maximum sur 16 bits : $32\ 767$.
+
+## Ariane 5
+
+- Pour ne pas saturer la mesure de l’accélération verticale au décollage, le logiciel effectue un écrêtage de sa représentation entière à -32 768 et +32 767 (extremums pour 16 bits). 
+- Mais cette précaution n'a pas été prise pour l'accélération horizontale car le risque de saturation n'était pas identifié pour Ariane 4. 
+- Malheureusement, il se produit avec Ariane 5, plus puissante et qui génère des accélérations de vol plus élevées. 
+- Faute de protection, un signal d'erreur a donc été envoyé.
+
+
