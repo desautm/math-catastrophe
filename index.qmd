@@ -345,6 +345,62 @@ for i in range(253, 259):
   print(f"{i:8,.0f}", f"{num:17,.0f}")
 ```
 
+# NUCLEAR GANDHI {background-color="black"}
+
+## {background-image="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Civ1_logo_v1.svg/1024px-Civ1_logo_v1.svg.png" background-size="contain"}
+
+## Civilization
+
+- Civilization est un jeu vidéo de stratégie.
+- Le joueur incarne le dirigeant d'une civilisation qu'il doit mener de l'âge de pierre à la conquête spatiale.
+- Le jeu peut être gagné soit en détruisant toutes les autres civilisations, soit en étant la première civilisation à atteindre Alpha Centauri.
+
+## {background-image="https://upload.wikimedia.org/wikipedia/en/a/a7/CivilizationAmigaAGA.png" background-color="black" background-size="contain"}
+
+## {background-image="https://upload.wikimedia.org/wikipedia/commons/3/3b/Nuclear_Gandhi.png" background-size="contain" background-color="black"}
+
+## {background-image="https://www.kxnet.com/wp-content/uploads/sites/16/2023/02/5f9.jpg" background-size="contain"}
+
+## NUCLEAR GANDHI
+
+- Dans le jeu original, lorsque le personnage de Gandhi (normalement extrêmement pacifique) est contrôlé par l'ordinateur, ce personnage pouvait utiliser l'arme atomique lors des conflits.
+- La valeur d'*aggressivité* de Gandhi débutait à 1 (la valeur minimale).
+- Cette valeur était stockée dans un entier non signé sur 8 bits.
+- Lorsqu'une civilisation atteint la démocratie, son aggressivité est réduite de 2.
+- Puisque cette valeur est stockée dans un entier non signé, son aggressivité devenait égale à 255!
+
+## NUCLEAR GANDHI
+
+```{python}
+#| echo: true
+import numpy as np
+
+aggressivite = np.array(1).astype('uint8')
+democratie = np.array(2).astype('uint8')
+print(aggressivite-democratie)
+```
+
+## ~~NUCLEAR GANDHI~~
+
+```{python}
+#| echo: true
+import numpy as np
+
+aggressivite = np.array(1).astype('uint8')
+democratie = np.array(2).astype('uint8')
+print(aggressivite-democratie)
+```
+
+. . .
+
+> "It is true that Gandhi would—eventually—use nukes when India was at war, just like any civilization in the game, and at the time this did strike a lot of players as odd,"
+
+. . .
+
+> "It’s also true that Gandhi would frequently threaten the player, because one of his primary traits was to avoid war, and deterrence through mutually assured destruction was an effective way to go about that."
+
+## {background-image="https://www.kxnet.com/wp-content/uploads/sites/16/2023/02/gandhi.png?resize=772,488" background-size="contain"}
+
 # PAC-MAN {background-color="black"}
 
 ## {background-image="https://media.cnn.com/api/v1/images/stellar/prod/200518114838-05-pac-man-40.jpg?q=w_1110,c_fill/f_webp"
