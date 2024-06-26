@@ -1122,8 +1122,68 @@ Marc-André Désautels
      130              -126</code></pre>
 </div>
 </div>
+</section></section>
+<section>
+<section id="gangnam-style" class="title-slide slide level1 center" data-background-color="black">
+<h1>Gangnam Style</h1>
+
 </section>
 <section id="section-11" class="slide level2">
+<h2></h2>
+<iframe width="1050" height="700" src="https://www.youtube.com/embed/9bZkp7q19f0?si=0XcKi7VkLiAKGYRi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
+</iframe>
+</section>
+<section id="gangnam-style-1" class="slide level2">
+<h2>Gangnam Style</h2>
+<ul>
+<li class="fragment">Bien qu’on ne soit plus en 2012, les gens regardent encore le vidéoclip GangNam Style de Psy sur Youtube.</li>
+<li class="fragment">Le code suivant permet de nous donner le nombre de visionnements, au moment où j’écris ces lignes.</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="im">from</span> pytube <span class="im">import</span> YouTube</span>
+<span id="cb19-2"><a href=""></a></span>
+<span id="cb19-3"><a href=""></a>video_url <span class="op">=</span> <span class="st">"https://www.youtube.com/watch?v=9bZkp7q19f0"</span></span>
+<span id="cb19-4"><a href=""></a></span>
+<span id="cb19-5"><a href=""></a>yt <span class="op">=</span> YouTube(video_url)</span>
+<span id="cb19-6"><a href=""></a><span class="bu">print</span>(<span class="st">"Visionnements:"</span>, yt.views)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Visionnements: 5194780379</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="gangnam-style-2" class="slide level2">
+<h2>Gangnam Style</h2>
+<ul>
+<li class="fragment">Lorsque YouTube a été développé, personne n’imaginait qu’un vidéo pourrait être regardé plus de 2 milliard de fois!</li>
+<li class="fragment">Le nombre de visionnements était stocké dans un entier signé de 32 bits.</li>
+<li class="fragment">Le nombre maximal représentable était donc <span class="math inline">\(2^{31}-1=2\ 147\ 483\ 647\)</span>.</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb21-2"><a href=""></a></span>
+<span id="cb21-3"><a href=""></a><span class="bu">max</span> <span class="op">=</span> np.array(<span class="dv">2</span><span class="op">**</span><span class="dv">31</span><span class="op">-</span><span class="dv">1</span>).astype(<span class="st">'int32'</span>)</span>
+<span id="cb21-4"><a href=""></a>un  <span class="op">=</span> np.array(<span class="dv">1</span>).astype(<span class="st">'int32'</span>)</span>
+<span id="cb21-5"><a href=""></a><span class="bu">print</span>(<span class="bu">max</span><span class="op">+</span>un)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-2147483648</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="gangnam-style-3" class="slide level2">
+<h2>Gangnam Style</h2>
+<ul>
+<li class="fragment">Les ingénieurs de YouTube ont vu poindre le problème.</li>
+<li class="fragment">Le nombre de visionnements est maintenant stocké dans un entier signé de 64 bits.</li>
+<li class="fragment">Le nombre maximal représentable devient donc <span class="math inline">\(2^{63}-1=9 \ 223\ 372\ 036\ 854 \ 775\ 807\)</span>.</li>
+<li class="fragment">Si vous voulez avoir l’air intelligent au prochain souper…</li>
+<li class="fragment">neuf quintillions deux cent vingt-trois quadrillions trois cent soixante-douze trillions trente-six milliards huit cent cinquante-quatre millions sept cent soixante-quinze mille huit cent sept.</li>
+</ul>
+</section>
+<section id="section-12" class="slide level2">
 <h2></h2>
 
 <img data-src="https://contentstatic.techgig.com/photo/83117460.cms" class="r-stretch"></section>
@@ -1136,27 +1196,27 @@ Marc-André Désautels
 </section>
 <section id="le-bogue" class="slide level2">
 <h2>Le bogue</h2>
-<div class="sourceCode" id="cb19" data-code-line-numbers="|6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb19-1"><a href=""></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> a<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb19-2"><a href=""></a>        <span class="dt">int</span> low <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb19-3"><a href=""></a>        <span class="dt">int</span> high <span class="op">=</span> a<span class="op">.</span><span class="fu">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb19-4"><a href=""></a></span>
-<span id="cb19-5"><a href=""></a>        <span class="cf">while</span> <span class="op">(</span>low <span class="op">&lt;=</span> high<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb19-6"><a href=""></a>            <span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb19-7"><a href=""></a>            <span class="dt">int</span> midVal <span class="op">=</span> a<span class="op">[</span>mid<span class="op">];</span></span>
-<span id="cb19-8"><a href=""></a></span>
-<span id="cb19-9"><a href=""></a>            <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&lt;</span> key<span class="op">)</span></span>
-<span id="cb19-10"><a href=""></a>                low <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb19-11"><a href=""></a>            <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&gt;</span> key<span class="op">)</span></span>
-<span id="cb19-12"><a href=""></a>                high <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb19-13"><a href=""></a>            <span class="cf">else</span></span>
-<span id="cb19-14"><a href=""></a>                <span class="cf">return</span> mid<span class="op">;</span> <span class="co">// key found</span></span>
-<span id="cb19-15"><a href=""></a>        <span class="op">}</span></span>
-<span id="cb19-16"><a href=""></a>        <span class="cf">return</span> <span class="op">-(</span>low <span class="op">+</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// key not found.</span></span>
-<span id="cb19-17"><a href=""></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23" data-code-line-numbers="|6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb23-1"><a href=""></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> a<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb23-2"><a href=""></a>        <span class="dt">int</span> low <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb23-3"><a href=""></a>        <span class="dt">int</span> high <span class="op">=</span> a<span class="op">.</span><span class="fu">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb23-4"><a href=""></a></span>
+<span id="cb23-5"><a href=""></a>        <span class="cf">while</span> <span class="op">(</span>low <span class="op">&lt;=</span> high<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb23-6"><a href=""></a>            <span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb23-7"><a href=""></a>            <span class="dt">int</span> midVal <span class="op">=</span> a<span class="op">[</span>mid<span class="op">];</span></span>
+<span id="cb23-8"><a href=""></a></span>
+<span id="cb23-9"><a href=""></a>            <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&lt;</span> key<span class="op">)</span></span>
+<span id="cb23-10"><a href=""></a>                low <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb23-11"><a href=""></a>            <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&gt;</span> key<span class="op">)</span></span>
+<span id="cb23-12"><a href=""></a>                high <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb23-13"><a href=""></a>            <span class="cf">else</span></span>
+<span id="cb23-14"><a href=""></a>                <span class="cf">return</span> mid<span class="op">;</span> <span class="co">// key found</span></span>
+<span id="cb23-15"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb23-16"><a href=""></a>        <span class="cf">return</span> <span class="op">-(</span>low <span class="op">+</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// key not found.</span></span>
+<span id="cb23-17"><a href=""></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="le-bogue-1" class="slide level2">
 <h2>Le bogue</h2>
-<div class="sourceCode" id="cb20"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li class="fragment"><p>Les entiers dans <code>Java</code> sont codés sur 32 bits.</p></li>
 <li class="fragment"><p>Le bug apparaît si la somme de <code>low</code> et <code>high</code> est plus grande que la valeur maximum possible pour un entier dans <code>Java</code>, <span class="math inline">\(2^{31}-1\)</span>.</p></li>
@@ -1166,80 +1226,80 @@ Marc-André Désautels
 </section>
 <section id="le-bogue-2" class="slide level2">
 <h2>Le bogue</h2>
-<div class="sourceCode" id="cb21"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li class="fragment">En tentant de répliquer le bogue en <code>Python</code>:</li>
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb22-2"><a href=""></a><span class="im">import</span> random</span>
-<span id="cb22-3"><a href=""></a></span>
-<span id="cb22-4"><a href=""></a>low <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
-<span id="cb22-5"><a href=""></a>high <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
-<span id="cb22-6"><a href=""></a><span class="bu">print</span>(low, high, <span class="bu">round</span>((low <span class="op">+</span> high) <span class="op">/</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb26-2"><a href=""></a><span class="im">import</span> random</span>
+<span id="cb26-3"><a href=""></a></span>
+<span id="cb26-4"><a href=""></a>low <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
+<span id="cb26-5"><a href=""></a>high <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
+<span id="cb26-6"><a href=""></a><span class="bu">print</span>(low, high, <span class="bu">round</span>((low <span class="op">+</span> high) <span class="op">/</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1114100337 2068165446 -556350756</code></pre>
+<pre><code>1946414050 1414908779 -466822234</code></pre>
 </div>
 </div>
 </div>
 </section>
 <section id="le-bogue-corrigé" class="slide level2">
 <h2>Le bogue… corrigé</h2>
-<div class="sourceCode" id="cb24" data-code-line-numbers="6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb24-1"><a href=""></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> a<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb24-2"><a href=""></a>        <span class="dt">int</span> low <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb24-3"><a href=""></a>        <span class="dt">int</span> high <span class="op">=</span> a<span class="op">.</span><span class="fu">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb24-4"><a href=""></a></span>
-<span id="cb24-5"><a href=""></a>        <span class="cf">while</span> <span class="op">(</span>low <span class="op">&lt;=</span> high<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb24-6"><a href=""></a>            <span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb24-7"><a href=""></a>            <span class="dt">int</span> midVal <span class="op">=</span> a<span class="op">[</span>mid<span class="op">];</span></span>
-<span id="cb24-8"><a href=""></a></span>
-<span id="cb24-9"><a href=""></a>            <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&lt;</span> key<span class="op">)</span></span>
-<span id="cb24-10"><a href=""></a>                low <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb24-11"><a href=""></a>            <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&gt;</span> key<span class="op">)</span></span>
-<span id="cb24-12"><a href=""></a>                high <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb24-13"><a href=""></a>            <span class="cf">else</span></span>
-<span id="cb24-14"><a href=""></a>                <span class="cf">return</span> mid<span class="op">;</span> <span class="co">// key found</span></span>
-<span id="cb24-15"><a href=""></a>        <span class="op">}</span></span>
-<span id="cb24-16"><a href=""></a>        <span class="cf">return</span> <span class="op">-(</span>low <span class="op">+</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// key not found.</span></span>
-<span id="cb24-17"><a href=""></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28" data-code-line-numbers="6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb28-1"><a href=""></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> a<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb28-2"><a href=""></a>        <span class="dt">int</span> low <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb28-3"><a href=""></a>        <span class="dt">int</span> high <span class="op">=</span> a<span class="op">.</span><span class="fu">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb28-4"><a href=""></a></span>
+<span id="cb28-5"><a href=""></a>        <span class="cf">while</span> <span class="op">(</span>low <span class="op">&lt;=</span> high<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb28-6"><a href=""></a>            <span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb28-7"><a href=""></a>            <span class="dt">int</span> midVal <span class="op">=</span> a<span class="op">[</span>mid<span class="op">];</span></span>
+<span id="cb28-8"><a href=""></a></span>
+<span id="cb28-9"><a href=""></a>            <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&lt;</span> key<span class="op">)</span></span>
+<span id="cb28-10"><a href=""></a>                low <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb28-11"><a href=""></a>            <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&gt;</span> key<span class="op">)</span></span>
+<span id="cb28-12"><a href=""></a>                high <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb28-13"><a href=""></a>            <span class="cf">else</span></span>
+<span id="cb28-14"><a href=""></a>                <span class="cf">return</span> mid<span class="op">;</span> <span class="co">// key found</span></span>
+<span id="cb28-15"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb28-16"><a href=""></a>        <span class="cf">return</span> <span class="op">-(</span>low <span class="op">+</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// key not found.</span></span>
+<span id="cb28-17"><a href=""></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="le-bogue-corrigé-1" class="slide level2">
 <h2>Le bogue… corrigé</h2>
-<div class="sourceCode" id="cb25" data-code-line-numbers="6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb25-1"><a href=""></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> a<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb25-2"><a href=""></a>        <span class="dt">int</span> low <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb25-3"><a href=""></a>        <span class="dt">int</span> high <span class="op">=</span> a<span class="op">.</span><span class="fu">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb25-4"><a href=""></a></span>
-<span id="cb25-5"><a href=""></a>        <span class="cf">while</span> <span class="op">(</span>low <span class="op">&lt;=</span> high<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb25-6"><a href=""></a>            <span class="dt">int</span> mid <span class="op">=</span> low <span class="op">+</span> <span class="op">((</span>high <span class="op">-</span> low<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">);</span></span>
-<span id="cb25-7"><a href=""></a>            <span class="dt">int</span> midVal <span class="op">=</span> a<span class="op">[</span>mid<span class="op">];</span></span>
-<span id="cb25-8"><a href=""></a></span>
-<span id="cb25-9"><a href=""></a>            <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&lt;</span> key<span class="op">)</span></span>
-<span id="cb25-10"><a href=""></a>                low <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb25-11"><a href=""></a>            <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&gt;</span> key<span class="op">)</span></span>
-<span id="cb25-12"><a href=""></a>                high <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb25-13"><a href=""></a>            <span class="cf">else</span></span>
-<span id="cb25-14"><a href=""></a>                <span class="cf">return</span> mid<span class="op">;</span> <span class="co">// key found</span></span>
-<span id="cb25-15"><a href=""></a>        <span class="op">}</span></span>
-<span id="cb25-16"><a href=""></a>        <span class="cf">return</span> <span class="op">-(</span>low <span class="op">+</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// key not found.</span></span>
-<span id="cb25-17"><a href=""></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29" data-code-line-numbers="6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb29-1"><a href=""></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> a<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb29-2"><a href=""></a>        <span class="dt">int</span> low <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb29-3"><a href=""></a>        <span class="dt">int</span> high <span class="op">=</span> a<span class="op">.</span><span class="fu">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb29-4"><a href=""></a></span>
+<span id="cb29-5"><a href=""></a>        <span class="cf">while</span> <span class="op">(</span>low <span class="op">&lt;=</span> high<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb29-6"><a href=""></a>            <span class="dt">int</span> mid <span class="op">=</span> low <span class="op">+</span> <span class="op">((</span>high <span class="op">-</span> low<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb29-7"><a href=""></a>            <span class="dt">int</span> midVal <span class="op">=</span> a<span class="op">[</span>mid<span class="op">];</span></span>
+<span id="cb29-8"><a href=""></a></span>
+<span id="cb29-9"><a href=""></a>            <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&lt;</span> key<span class="op">)</span></span>
+<span id="cb29-10"><a href=""></a>                low <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb29-11"><a href=""></a>            <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&gt;</span> key<span class="op">)</span></span>
+<span id="cb29-12"><a href=""></a>                high <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb29-13"><a href=""></a>            <span class="cf">else</span></span>
+<span id="cb29-14"><a href=""></a>                <span class="cf">return</span> mid<span class="op">;</span> <span class="co">// key found</span></span>
+<span id="cb29-15"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb29-16"><a href=""></a>        <span class="cf">return</span> <span class="op">-(</span>low <span class="op">+</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// key not found.</span></span>
+<span id="cb29-17"><a href=""></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="le-bogue-corrigé-2" class="slide level2">
 <h2>Le bogue… corrigé</h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mid <span class="op">=</span> low <span class="op">+</span> <span class="op">((</span>high <span class="op">-</span> low<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mid <span class="op">=</span> low <span class="op">+</span> <span class="op">((</span>high <span class="op">-</span> low<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li class="fragment">En <code>Python</code>:</li>
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb27-2"><a href=""></a><span class="im">import</span> random</span>
-<span id="cb27-3"><a href=""></a></span>
-<span id="cb27-4"><a href=""></a>low <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
-<span id="cb27-5"><a href=""></a>high <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
-<span id="cb27-6"><a href=""></a><span class="bu">print</span>(low, high, <span class="bu">round</span>(low <span class="op">+</span> (high <span class="op">-</span> low) <span class="op">/</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb31-2"><a href=""></a><span class="im">import</span> random</span>
+<span id="cb31-3"><a href=""></a></span>
+<span id="cb31-4"><a href=""></a>low <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
+<span id="cb31-5"><a href=""></a>high <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
+<span id="cb31-6"><a href=""></a><span class="bu">print</span>(low, high, <span class="bu">round</span>(low <span class="op">+</span> (high <span class="op">-</span> low) <span class="op">/</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1817995010 2087323845 1952659428</code></pre>
+<pre><code>1849331255 1888334733 1868832994</code></pre>
 </div>
 </div>
 </div>
@@ -1281,7 +1341,7 @@ Marc-André Désautels
 </ul>
 </section></section>
 <section>
-<section id="section-12" class="title-slide slide level1 center" data-background-image="boeing_787.jpg" data-background-size="contain" data-background-color="rgba(82,129,175)">
+<section id="section-13" class="title-slide slide level1 center" data-background-image="boeing_787.jpg" data-background-size="contain" data-background-color="rgba(82,129,175)">
 <h1></h1>
 
 </section>
@@ -1289,7 +1349,7 @@ Marc-André Désautels
 <h2>Désolé pour les gens souffrant d’aviophobie…</h2>
 
 <img data-src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnVpcmM5N3JuZzZmYnlxaXhzMXM5a2hoNmZwaHBqbDFjbTVxb3lpbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AkHo4NUqzvhn9NBluB/giphy.gif" class="r-stretch"></section>
-<section id="section-13" class="slide level2">
+<section id="section-14" class="slide level2">
 <h2></h2>
 <div class="fragment">
 <blockquote>
@@ -1329,7 +1389,7 @@ Marc-André Désautels
 <section id="virgule-fixe-1" class="slide level2">
 <h2>Virgule fixe</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"></section>
 <section id="quelques-exemples" class="slide level2">
 <h2>Quelques exemples</h2>
 <ul>
@@ -1365,7 +1425,7 @@ Marc-André Désautels
 <h1>Missiles Patriot</h1>
 
 </section>
-<section id="section-14" class="slide level2" data-background-image="https://media1.ledevoir.com/images_galerie/nwd_1496480_1151758/image.jpg" data-background-color="black" data-background-size="contain">
+<section id="section-15" class="slide level2" data-background-image="https://media1.ledevoir.com/images_galerie/nwd_1496480_1151758/image.jpg" data-background-color="black" data-background-size="contain">
 <h2></h2>
 </section>
 <section id="missiles-patriot-1" class="slide level2">
@@ -1465,7 +1525,7 @@ Marc-André Désautels
 <section id="la-norme-ieee-754" class="slide level2">
 <h2>La norme IEEE 754</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"></section>
 <section id="la-norme-ieee-754-1" class="slide level2">
 <h2>La norme IEEE 754</h2>
 <ul>
@@ -1501,7 +1561,7 @@ N = S \times 2^{E-\text{BIAIS}} \times \left(1+\frac{M}{2^m}\right)
 </section>
 
 <section>
-<section id="section-15" class="title-slide slide level1 center">
+<section id="section-16" class="title-slide slide level1 center">
 <h1></h1>
 <iframe width="1050" height="700" src="https://www.youtube.com/embed/N6PWATvLQCY?si=kkcboVm0QZ0cqMBh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
 </iframe>

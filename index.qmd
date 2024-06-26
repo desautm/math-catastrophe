@@ -1076,6 +1076,56 @@ for i in range(125, 131):
   print(f"{i:8,.0f}", f"{num:17,.0f}")
 ```
 
+# Gangnam Style {background-color="black"}
+
+##
+
+<iframe width="1050" height="700" src="https://www.youtube.com/embed/9bZkp7q19f0?si=0XcKi7VkLiAKGYRi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## Gangnam Style
+
+- Bien qu'on ne soit plus en 2012, les gens regardent encore le vidéoclip GangNam Style de Psy sur Youtube.
+- Le code suivant permet de nous donner le nombre de visionnements, au moment où j'écris ces lignes.
+
+. . .
+
+```{python}
+#| echo: true
+
+from pytube import YouTube
+
+video_url = "https://www.youtube.com/watch?v=9bZkp7q19f0"
+
+yt = YouTube(video_url)
+print("Visionnements:", yt.views)
+```
+
+## Gangnam Style
+
+- Lorsque YouTube a été développé, personne n'imaginait qu'un vidéo pourrait être regardé plus de 2 milliard de fois!
+- Le nombre de visionnements était stocké dans un entier signé de 32 bits.
+- Le nombre maximal représentable était donc $2^{31}-1=2\ 147\ 483\ 647$.
+
+. . .
+
+```{python}
+#| echo: true
+
+import numpy as np
+
+max = np.array(2**31-1).astype('int32')
+un  = np.array(1).astype('int32')
+print(max+un)
+```
+
+## Gangnam Style
+
+- Les ingénieurs de YouTube ont vu poindre le problème.
+- Le nombre de visionnements est maintenant stocké dans un entier signé de 64 bits.
+- Le nombre maximal représentable devient donc $2^{63}-1=9 \ 223\ 372\ 036\ 854 \ 775\ 807$.
+- Si vous voulez avoir l'air intelligent au prochain souper...
+- neuf quintillions deux cent vingt-trois quadrillions trois cent soixante-douze trillions trente-six milliards huit cent cinquante-quatre millions sept cent soixante-quinze mille huit cent sept.
+
 ## 
 
 ![](https://contentstatic.techgig.com/photo/83117460.cms)
