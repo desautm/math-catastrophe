@@ -16,6 +16,16 @@ execute:
 
 ##  {background-image="https://www.cs.cornell.edu/~hweather/FaultTolerance/HW1/y2k_checklist.gif" background-size="contain"}
 
+# Les erreurs de débordement {background-color="black"}
+
+## Les erreurs de débordement
+
+- Un dépassement d'entier (*integer overflow*) ou erreur d'opérande est, en informatique, une condition qui se produit lorsqu'une opération mathématique produit une valeur numérique supérieure à celle représentable dans l'espace de stockage disponible.
+- Par exemple, l'ajout d'une unité au plus grand nombre pouvant être représenté entraîne un dépassement d'entier.
+
+
+## {background-image="https://upload.wikimedia.org/wikipedia/commons/5/53/Odometer_rollover.jpg" background-color="black" background-size="contain"}
+
 # La représentation des nombres {background-color="black"}
 
 ## Système de numération
@@ -34,7 +44,7 @@ Le système positionnel utilise la **représentation polynomiale**. Celle-ci est
 
 $$
 \begin{aligned}
-(a_na_{n-1}\ldots a_1a_0,a_{-1}a_{-2}\ldots a_{-m})_b &= \sum_{k=-m}^n a_k b^k
+(a_na_{n-1}\cdots a_1a_0,a_{-1}a_{-2}\cdots a_{-m})_b &= \sum_{k=-m}^n a_k b^k
 \end{aligned}
 $$ 
 
@@ -1076,6 +1086,26 @@ for i in range(125, 131):
   print(f"{i:8,.0f}", f"{num:17,.0f}")
 ```
 
+# Super Mario Bros. {background-color="black"}
+
+# {background-image="https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png" background-color="black" background-size="contain"}
+
+# {background-image="https://upload.wikimedia.org/wikipedia/en/5/50/NES_Super_Mario_Bros.png"}
+
+#
+
+<iframe width="1050" height="700" src="https://www.youtube.com/embed/0X9_K9prpVc?si=Mfzw69uU0n0KM73p" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## Super Mario Bros
+
+- Le nombre de vies de Mario est stocké dans un entier signé sur 8 bits.
+- Un joueur peut donc avoir 127 vies.
+- Sauf que le compteur devient un peu fou bien avant...
+
+# {background-image="mario.png" background-color="black" background-size="contain"}
+
+# {background-image="mario-lives.png" background-color="black" background-size="contain"}
+
 # Gangnam Style {background-color="black"}
 
 ##
@@ -1291,6 +1321,26 @@ celui de l'an 2038
 - La date butoir se retrouverait le dimanche 4 décembre 292 277 026 596 après J.-C. à 15 h 30 min 8 s.
 
 - Environ 21 fois l'âge de l'univers.
+
+# GPS week number rollover {background-color="black"}
+
+## GPS week number rollover
+
+- La date diffusée par le GPS contient le nombre de semaines depuis le 6 janvier 1980.
+- Elle est stockée sur dix chiffres binaires, donc une plage de 0 à 1 023.
+- Débordement de 1999.
+  - Perturbations mineures.
+- Débordement de 2019.
+  - Retard d'un vol KLM et l'annulation de nombreux vols en Chine.
+  - Le réseau sans fil de la ville de New York s'est effondré.
+  - Certains téléphones portables ont connus des problèmes.
+
+## GPS week number rollover
+
+- Débordement de 2038.
+- Débordement de 2137.
+  - Le protocole CNAV plus récent, successeur du protocole NAV original, utilise des numéros de semaine de treize bits.
+  - Ça équivaut à un cycle de 8 192 semaines, soit environ 157 ans.
 
 # {background-image="boeing_787.jpg" background-size="contain" background-color=rgba(82,129,175)}
 
