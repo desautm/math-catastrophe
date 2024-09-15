@@ -655,10 +655,10 @@ Marc-André Désautels
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href=""></a></span>
 <span id="cb5-3"><a href=""></a>a <span class="op">=</span> np.array(<span class="dv">255</span>).astype(<span class="st">'uint8'</span>)</span>
-<span id="cb5-4"><a href=""></a>b <span class="op">=</span> np.array(<span class="dv">1</span>).astype(<span class="st">'uint8'</span>)</span>
+<span id="cb5-4"><a href=""></a>b <span class="op">=</span> np.array(<span class="dv">256</span>).astype(<span class="st">'uint8'</span>)</span>
 <span id="cb5-5"><a href=""></a><span class="bu">print</span>(a, b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>255 1</code></pre>
+<pre><code>255 0</code></pre>
 </div>
 </div>
 </div>
@@ -1273,9 +1273,9 @@ Marc-André Désautels
 <div class="sourceCode" id="cb24"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li class="fragment"><p>Les entiers dans <code>Java</code> sont codés sur 32 bits.</p></li>
-<li class="fragment"><p>Le bug apparaît si la somme de <code>low</code> et <code>high</code> est plus grande que la valeur maximum possible pour un entier dans <code>Java</code>, <span class="math inline">\(2^{31}-1\)</span>.</p></li>
+<li class="fragment"><p>Le bug apparaît si la somme de <code>low</code> et <code>high</code> est plus grande que la valeur maximum possible pour un entier signé dans <code>Java</code>, <span class="math inline">\(2^{31}-1\)</span>.</p></li>
 <li class="fragment"><p>La somme déborde en une valeur <strong>négative</strong>, et la valeur reste négative lorsque divisée par deux.</p></li>
-<li class="fragment"><p>Le bogue peut apparaître pour des vecteurs de longueurs (en nombre d’éléments) <span class="math inline">\(2^{30}\)</span> ou plus (environ un milliard d’éléments). De tels vecteurs étaient impensable dans les années 1980 lorsque le code a été écrit.</p></li>
+<li class="fragment"><p>Le bogue peut apparaître pour des vecteurs de longueurs (en nombre d’éléments) <span class="math inline">\(2^{30}\)</span> ou plus (environ un milliard d’éléments). De tels vecteurs étaient impensables dans les années 1980 lorsque le code a été écrit.</p></li>
 </ul>
 </section>
 <section id="le-bogue-2" class="slide level2">
@@ -1403,7 +1403,14 @@ Marc-André Désautels
 <h2>GPS week number rollover</h2>
 <ul>
 <li class="fragment">La date diffusée par le GPS contient le nombre de semaines depuis le 6 janvier 1980.</li>
-<li class="fragment">Elle est stockée sur dix chiffres binaires, donc une plage de 0 à 1 023.</li>
+<li class="fragment">Elle est stockée sur dix bits, donc une plage de 0 à 1 023.</li>
+<li class="fragment">Il y a donc un débordement à chaque 1 024 semaines, ou 19,6 ans.</li>
+<li class="fragment">Les logiciels qui ne sont pas codés pour anticiper le retour à zéro peuvent cesser de fonctionner ou reculer de 20 ou 40 ans.</li>
+</ul>
+</section>
+<section id="gps-week-number-rollover-2" class="slide level2">
+<h2>GPS week number rollover</h2>
+<ul>
 <li class="fragment">Débordement de 1999.
 <ul>
 <li class="fragment">Perturbations mineures.</li>
@@ -1416,7 +1423,7 @@ Marc-André Désautels
 </ul></li>
 </ul>
 </section>
-<section id="gps-week-number-rollover-2" class="slide level2">
+<section id="gps-week-number-rollover-3" class="slide level2">
 <h2>GPS week number rollover</h2>
 <ul>
 <li class="fragment">Débordement de 2038.</li>
@@ -1679,6 +1686,59 @@ N = S \times 2^{E-\text{BIAIS}} \times \left(1+\frac{M}{2^m}\right)
 <li class="fragment">Malheureusement, il se produit avec Ariane 5, plus puissante et qui génère des accélérations de vol plus élevées.</li>
 <li class="fragment">Faute de protection, un signal d’erreur a donc été envoyé.</li>
 </ul>
+</section>
+<section id="ariane-5-4" class="slide level2">
+<h2>Ariane 5</h2>
+<p>Le code problématique:</p>
+<div class="fragment">
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource fortran number-lines code-with-copy"><code class="sourceCode fortranfixed"><span id="cb33-1"><a href=""></a>L_M_BV_32 :<span class="kw">=</span> TBD.T_ENTIER_16S((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
+<span id="cb33-2"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span>
+<span id="cb33-3"><a href=""></a><span class="kw">if</span> L_M_BV_32 <span class="op">&gt;</span> <span class="dv">32767</span> <span class="kw">then</span></span>
+<span id="cb33-4"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">7</span>FFF#;</span>
+<span id="cb33-5"><a href=""></a><span class="kw">elseif</span> L_M_BV_32 <span class="op">&lt;</span> <span class="kw">-</span><span class="dv">32768</span> <span class="kw">then</span></span>
+<span id="cb33-6"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">8000</span>#;</span>
+<span id="cb33-7"><a href=""></a><span class="kw">else</span></span>
+<span id="cb33-8"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S(L_M_BV_32));</span>
+<span id="cb33-9"><a href=""></a><span class="kw">end if</span>;</span>
+<span id="cb33-10"><a href=""></a></span>
+<span id="cb33-11"><a href=""></a>P_M_DERIVE(T_ALG.E_BH) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S</span>
+<span id="cb33-12"><a href=""></a>                                   ((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
+<span id="cb33-13"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ariane-5-5" class="slide level2">
+<h2>Ariane 5</h2>
+<p>Le cas de l’accélération verticale est évalué correctement.</p>
+<div class="sourceCode" id="cb34" data-code-line-numbers="1-9"><pre class="sourceCode numberSource fortran number-lines code-with-copy"><code class="sourceCode fortranfixed"><span id="cb34-1"><a href=""></a>L_M_BV_32 :<span class="kw">=</span> TBD.T_ENTIER_16S((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
+<span id="cb34-2"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span>
+<span id="cb34-3"><a href=""></a><span class="kw">if</span> L_M_BV_32 <span class="op">&gt;</span> <span class="dv">32767</span> <span class="kw">then</span></span>
+<span id="cb34-4"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">7</span>FFF#;</span>
+<span id="cb34-5"><a href=""></a><span class="kw">elseif</span> L_M_BV_32 <span class="op">&lt;</span> <span class="kw">-</span><span class="dv">32768</span> <span class="kw">then</span></span>
+<span id="cb34-6"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">8000</span>#;</span>
+<span id="cb34-7"><a href=""></a><span class="kw">else</span></span>
+<span id="cb34-8"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S(L_M_BV_32));</span>
+<span id="cb34-9"><a href=""></a><span class="kw">end if</span>;</span>
+<span id="cb34-10"><a href=""></a></span>
+<span id="cb34-11"><a href=""></a>P_M_DERIVE(T_ALG.E_BH) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S</span>
+<span id="cb34-12"><a href=""></a>                                   ((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
+<span id="cb34-13"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="ariane-5-6" class="slide level2">
+<h2>Ariane 5</h2>
+<p>Le cas de l’accélération horizontale ne l’est pas…</p>
+<div class="sourceCode" id="cb35" data-code-line-numbers="11-13"><pre class="sourceCode numberSource fortran number-lines code-with-copy"><code class="sourceCode fortranfixed"><span id="cb35-1"><a href=""></a>L_M_BV_32 :<span class="kw">=</span> TBD.T_ENTIER_16S((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
+<span id="cb35-2"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span>
+<span id="cb35-3"><a href=""></a><span class="kw">if</span> L_M_BV_32 <span class="op">&gt;</span> <span class="dv">32767</span> <span class="kw">then</span></span>
+<span id="cb35-4"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">7</span>FFF#;</span>
+<span id="cb35-5"><a href=""></a><span class="kw">elseif</span> L_M_BV_32 <span class="op">&lt;</span> <span class="kw">-</span><span class="dv">32768</span> <span class="kw">then</span></span>
+<span id="cb35-6"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">8000</span>#;</span>
+<span id="cb35-7"><a href=""></a><span class="kw">else</span></span>
+<span id="cb35-8"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S(L_M_BV_32));</span>
+<span id="cb35-9"><a href=""></a><span class="kw">end if</span>;</span>
+<span id="cb35-10"><a href=""></a></span>
+<span id="cb35-11"><a href=""></a>P_M_DERIVE(T_ALG.E_BH) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S</span>
+<span id="cb35-12"><a href=""></a>                                   ((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
+<span id="cb35-13"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <p><img src="logo-cegep.jpg" class="slide-logo"></p>
 <div class="footer footer-default">

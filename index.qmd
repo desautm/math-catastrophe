@@ -326,7 +326,7 @@ Pour obtenir les mêmes résultats en `Python`, nous utiliserons la librarie `nu
 import numpy as np
 
 a = np.array(255).astype('uint8')
-b = np.array(1).astype('uint8')
+b = np.array(256).astype('uint8')
 print(a, b)
 ```
 
@@ -1196,11 +1196,11 @@ int mid = (low + high) / 2;
 
 - Les entiers dans `Java` sont codés sur 32 bits.
 
-- Le bug apparaît si la somme de `low` et `high` est plus grande que la valeur maximum possible pour un entier dans `Java`, $2^{31}-1$. 
+- Le bug apparaît si la somme de `low` et `high` est plus grande que la valeur maximum possible pour un entier signé dans `Java`, $2^{31}-1$. 
 
 - La somme déborde en une valeur **négative**, et la valeur reste négative lorsque divisée par deux.
 
-- Le bogue peut apparaître pour des vecteurs de longueurs (en nombre d'éléments) $2^{30}$ ou plus (environ un milliard d'éléments). De tels vecteurs étaient impensable dans les années 1980 lorsque le code a été écrit.
+- Le bogue peut apparaître pour des vecteurs de longueurs (en nombre d'éléments) $2^{30}$ ou plus (environ un milliard d'éléments). De tels vecteurs étaient impensables dans les années 1980 lorsque le code a été écrit.
 
 ## Le bogue
 
@@ -1327,7 +1327,12 @@ celui de l'an 2038
 ## GPS week number rollover
 
 - La date diffusée par le GPS contient le nombre de semaines depuis le 6 janvier 1980.
-- Elle est stockée sur dix chiffres binaires, donc une plage de 0 à 1 023.
+- Elle est stockée sur dix bits, donc une plage de 0 à 1 023.
+- Il y a donc un débordement à chaque 1 024 semaines, ou 19,6 ans.
+- Les logiciels qui ne sont pas codés pour anticiper le retour à zéro peuvent cesser de fonctionner ou reculer de 20 ou 40 ans.
+
+## GPS week number rollover
+
 - Débordement de 1999.
   - Perturbations mineures.
 - Débordement de 2019.
@@ -1644,4 +1649,65 @@ $$
 - Malheureusement, il se produit avec Ariane 5, plus puissante et qui génère des accélérations de vol plus élevées. 
 - Faute de protection, un signal d'erreur a donc été envoyé.
 
+## Ariane 5
 
+Le code problématique:
+
+. . .
+
+```{.fortran}
+L_M_BV_32 := TBD.T_ENTIER_16S((1.0 / C_M_LSB_BH) *
+                                   G_M_INFO_DERIVE(T_ALG.E_BH));
+if L_M_BV_32 > 32767 then
+ P_M_DERIVE(T_ALG.E_BV) := 16#7FFF#;
+elseif L_M_BV_32 < -32768 then
+ P_M_DERIVE(T_ALG.E_BV) := 16#8000#;
+else
+ P_M_DERIVE(T_ALG.E_BV) := UC_16S_EN_16NS(TBD.T_ENTIER_16S(L_M_BV_32));
+end if;
+
+P_M_DERIVE(T_ALG.E_BH) := UC_16S_EN_16NS(TBD.T_ENTIER_16S
+                                   ((1.0 / C_M_LSB_BH) *
+                                   G_M_INFO_DERIVE(T_ALG.E_BH));
+```
+
+## Ariane 5
+
+Le cas de l'accélération verticale est évalué correctement.
+
+```{.fortran code-line-numbers="1-9"}
+L_M_BV_32 := TBD.T_ENTIER_16S((1.0 / C_M_LSB_BH) *
+                                   G_M_INFO_DERIVE(T_ALG.E_BH));
+if L_M_BV_32 > 32767 then
+ P_M_DERIVE(T_ALG.E_BV) := 16#7FFF#;
+elseif L_M_BV_32 < -32768 then
+ P_M_DERIVE(T_ALG.E_BV) := 16#8000#;
+else
+ P_M_DERIVE(T_ALG.E_BV) := UC_16S_EN_16NS(TBD.T_ENTIER_16S(L_M_BV_32));
+end if;
+
+P_M_DERIVE(T_ALG.E_BH) := UC_16S_EN_16NS(TBD.T_ENTIER_16S
+                                   ((1.0 / C_M_LSB_BH) *
+                                   G_M_INFO_DERIVE(T_ALG.E_BH));
+```
+
+
+## Ariane 5
+
+Le cas de l'accélération horizontale ne l'est pas...
+
+```{.fortran code-line-numbers="11-13"}
+L_M_BV_32 := TBD.T_ENTIER_16S((1.0 / C_M_LSB_BH) *
+                                   G_M_INFO_DERIVE(T_ALG.E_BH));
+if L_M_BV_32 > 32767 then
+ P_M_DERIVE(T_ALG.E_BV) := 16#7FFF#;
+elseif L_M_BV_32 < -32768 then
+ P_M_DERIVE(T_ALG.E_BV) := 16#8000#;
+else
+ P_M_DERIVE(T_ALG.E_BV) := UC_16S_EN_16NS(TBD.T_ENTIER_16S(L_M_BV_32));
+end if;
+
+P_M_DERIVE(T_ALG.E_BH) := UC_16S_EN_16NS(TBD.T_ENTIER_16S
+                                   ((1.0 / C_M_LSB_BH) *
+                                   G_M_INFO_DERIVE(T_ALG.E_BH));
+```
