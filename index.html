@@ -56,44 +56,44 @@
         -khtml-user-select: none; -moz-user-select: none;
         -ms-user-select: none; user-select: none;
         padding: 0 4px; width: 4em;
-        color: #aaaaaa;
       }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
     div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
+      { color: #f8f8f2; background-color: #282a36; }
     @media screen {
     pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #ff79c6; } /* Annotation */
+    code span.at { color: #ff79c6; } /* Attribute */
+    code span.bn { color: #bd93f9; } /* BaseN */
+    code span.bu { color: #8be9fd; } /* BuiltIn */
+    code span.cf { color: #ff79c6; } /* ControlFlow */
+    code span.ch { color: #f1fa8c; } /* Char */
+    code span.cn { color: #bd93f9; font-weight: bold; } /* Constant */
+    code span.co { color: #6272a4; } /* Comment */
+    code span.cv { color: #8be9fd; } /* CommentVar */
+    code span.do { color: #ffb86c; } /* Documentation */
+    code span.dt { color: #8be9fd; font-style: italic; } /* DataType */
+    code span.dv { color: #bd93f9; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #8be9fd; } /* Extension */
+    code span.fl { color: #bd93f9; } /* Float */
+    code span.fu { color: #50fa7b; } /* Function */
+    code span.im { color: #ff79c6; } /* Import */
+    code span.in { color: #f1fa8c; } /* Information */
+    code span.kw { color: #ff79c6; } /* Keyword */
+    code span.op { color: #f8f8f2; } /* Operator */
+    code span.ot { color: #50fa7b; } /* Other */
+    code span.pp { color: #ff79c6; } /* Preprocessor */
+    code span.re { color: #8be9fd; } /* RegionMarker */
+    code span.sc { color: #ff79c6; } /* SpecialChar */
+    code span.ss { color: #f1fa8c; } /* SpecialString */
+    code span.st { color: #f1fa8c; } /* String */
+    code span.va { color: #8be9fd; } /* Variable */
+    code span.vs { color: #f1fa8c; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
   </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -414,7 +414,7 @@ Marc-André Désautels
 <section id="les-erreurs-de-débordement-1" class="slide level2">
 <h2>Les erreurs de débordement</h2>
 <ul>
-<li class="fragment">Un dépassement d’entier (<em>integer overflow</em>) ou erreur d’opérande est, en informatique, une condition qui se produit lorsqu’une opération mathématique produit une valeur numérique supérieure à celle représentable dans l’espace de stockage disponible.</li>
+<li class="fragment">Un dépassement d’entier (<em>integer overflow</em>) est une condition qui se produit lorsqu’une opération mathématique produit une valeur numérique supérieure à celle représentable dans l’espace de stockage disponible.</li>
 <li class="fragment">Par exemple, l’ajout d’une unité au plus grand nombre pouvant être représenté entraîne un dépassement d’entier.</li>
 </ul>
 </section>
@@ -488,9 +488,6 @@ Marc-André Désautels
 <li class="fragment"><p>1 + 0 = 1</p></li>
 <li class="fragment"><p>1 + 1 = 10</p></li>
 </ul>
-<div class="fragment">
-<p>avec un report de 1 à la dernière addition.</p>
-</div>
 <div class="fragment">
 <p><span class="math display">\[
 \begin{array}{ccccccc}
@@ -610,7 +607,7 @@ Marc-André Désautels
 <ul>
 <li class="fragment"><p>Sur 8 bits, la plus grande valeur représentable est 255.</p></li>
 <li class="fragment"><p>Les nombres supérieurs à cette valeur ne peuvent tout simplement pas être représentés avec seulement 8 bits.</p></li>
-<li class="fragment"><p>Pire encore, si une opération arithmétique produit une valeur supérieure à cette limite, il se produit un <strong>dépassement d’entier</strong> (en anglais <em>integer overflow</em>).</p></li>
+<li class="fragment"><p>Pire encore, si une opération arithmétique produit une valeur supérieure à cette limite, il se produit un <strong>dépassement d’entier</strong>.</p></li>
 </ul>
 <div class="fragment">
 <div class="cell" data-layout-align="center">
@@ -717,7 +714,7 @@ Marc-André Désautels
 <section id="nuclear-gandhi-1" class="slide level2">
 <h2>NUCLEAR GANDHI</h2>
 <ul>
-<li class="fragment">Dans le jeu original, lorsque le personnage de Gandhi (normalement extrêmement pacifique) est contrôlé par l’ordinateur, ce personnage pouvait utiliser l’arme atomique lors des conflits.</li>
+<li class="fragment">Dans le jeu original, lorsque le personnage de Gandhi est contrôlé par l’ordinateur, ce personnage pouvait utiliser l’arme atomique lors des conflits.</li>
 <li class="fragment">La valeur d’<em>aggressivité</em> de Gandhi débutait à 1 (la valeur minimale).</li>
 <li class="fragment">Cette valeur était stockée dans un entier non signé sur 8 bits.</li>
 <li class="fragment">Lorsqu’une civilisation atteint la démocratie, son aggressivité est réduite de 2.</li>
@@ -895,6 +892,11 @@ Marc-André Désautels
 <li class="fragment"><p>Des dépassements de capacité se produisaient et engendraient la désactivation de certains tests de sécurité.</p></li>
 </ul>
 </section></section>
+<section id="section-12" class="title-slide slide level1 center">
+<h1></h1>
+
+<img data-src="Therac25.png" class="r-stretch"></section>
+
 <section>
 <section id="les-entiers-signés" class="title-slide slide level1 center" data-background-color="black">
 <h1>Les entiers signés</h1>
@@ -1143,18 +1145,18 @@ Marc-André Désautels
 
 </section>
 
-<section id="section-12" class="title-slide slide level1 center" data-background-image="https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png" data-background-color="black" data-background-size="contain">
+<section id="section-13" class="title-slide slide level1 center" data-background-image="https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png" data-background-color="black" data-background-size="contain">
 <h1></h1>
 
 </section>
 
-<section id="section-13" class="title-slide slide level1 center" data-background-image="https://upload.wikimedia.org/wikipedia/en/5/50/NES_Super_Mario_Bros.png">
+<section id="section-14" class="title-slide slide level1 center" data-background-image="https://upload.wikimedia.org/wikipedia/en/5/50/NES_Super_Mario_Bros.png">
 <h1></h1>
 
 </section>
 
 <section>
-<section id="section-14" class="title-slide slide level1 center">
+<section id="section-15" class="title-slide slide level1 center">
 <h1></h1>
 <iframe width="1050" height="700" src="https://www.youtube.com/embed/0X9_K9prpVc?si=Mfzw69uU0n0KM73p" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
 </iframe>
@@ -1167,12 +1169,12 @@ Marc-André Désautels
 <li class="fragment">Sauf que le compteur devient un peu fou bien avant…</li>
 </ul>
 </section></section>
-<section id="section-15" class="title-slide slide level1 center" data-background-image="mario.png" data-background-color="black" data-background-size="contain">
+<section id="section-16" class="title-slide slide level1 center" data-background-image="mario.png" data-background-color="black" data-background-size="contain">
 <h1></h1>
 
 </section>
 
-<section id="section-16" class="title-slide slide level1 center" data-background-image="mario-lives.png" data-background-color="black" data-background-size="contain">
+<section id="section-17" class="title-slide slide level1 center" data-background-image="mario-lives.png" data-background-color="black" data-background-size="contain">
 <h1></h1>
 
 </section>
@@ -1182,7 +1184,7 @@ Marc-André Désautels
 <h1>Gangnam Style</h1>
 
 </section>
-<section id="section-17" class="slide level2">
+<section id="section-18" class="slide level2">
 <h2></h2>
 <iframe width="1050" height="700" src="https://www.youtube.com/embed/9bZkp7q19f0?si=0XcKi7VkLiAKGYRi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
 </iframe>
@@ -1202,7 +1204,7 @@ Marc-André Désautels
 <span id="cb19-5"><a href=""></a>yt <span class="op">=</span> YouTube(video_url)</span>
 <span id="cb19-6"><a href=""></a><span class="bu">print</span>(<span class="st">"Visionnements:"</span>, yt.views)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Visionnements: 5194780379</code></pre>
+<pre><code>Visionnements: 5287372950</code></pre>
 </div>
 </div>
 </div>
@@ -1210,7 +1212,7 @@ Marc-André Désautels
 <section id="gangnam-style-2" class="slide level2">
 <h2>Gangnam Style</h2>
 <ul>
-<li class="fragment">Lorsque YouTube a été développé, personne n’imaginait qu’un vidéo pourrait être regardé plus de 2 milliard de fois!</li>
+<li class="fragment">Lorsque YouTube a été développé, personne n’imaginait qu’une vidéo pourrait être regardée plus de 2 milliard de fois!</li>
 <li class="fragment">Le nombre de visionnements était stocké dans un entier signé de 32 bits.</li>
 <li class="fragment">Le nombre maximal représentable était donc <span class="math inline">\(2^{31}-1=2\ 147\ 483\ 647\)</span>.</li>
 </ul>
@@ -1237,7 +1239,7 @@ Marc-André Désautels
 <li class="fragment">neuf quintillions deux cent vingt-trois quadrillions trois cent soixante-douze trillions trente-six milliards huit cent cinquante-quatre millions sept cent soixante-quinze mille huit cent sept.</li>
 </ul>
 </section>
-<section id="section-18" class="slide level2">
+<section id="section-19" class="slide level2">
 <h2></h2>
 
 <img data-src="https://contentstatic.techgig.com/photo/83117460.cms" class="r-stretch"></section>
@@ -1370,7 +1372,7 @@ Marc-André Désautels
 <ul>
 <li class="fragment"><p>Le nombre de secondes écoulées depuis le 1er janvier 1970 00:00:00 UTC, hors secondes intercalaires.</p></li>
 <li class="fragment"><p>Une seconde intercalaire, est un procédé employé pour ajuster le temps universel coordonné (UTC), au temps solaire.</p></li>
-<li class="fragment"><p>Sur les ordinateurs fonctionnant en 32 bits, la plupart des systèmes d’exploitation concernés représentent ce nombre comme un nombre entier signé de 32 bits, ce qui limite le nombre de secondes à <span class="math inline">\(2^{31}-1\)</span>.</p></li>
+<li class="fragment"><p>Sur les ordinateurs fonctionnant sur 32 bits, la plupart des systèmes d’exploitation concernés représentent ce nombre comme un nombre entier signé de 32 bits, ce qui limite le nombre de secondes à <span class="math inline">\(2^{31}-1\)</span>.</p></li>
 </ul>
 </section>
 <section id="la-représentation-posix-du-temps-1" class="slide level2">
@@ -1435,7 +1437,7 @@ Marc-André Désautels
 </ul>
 </section></section>
 <section>
-<section id="section-19" class="title-slide slide level1 center" data-background-image="boeing_787.jpg" data-background-size="contain" data-background-color="rgba(82,129,175)">
+<section id="section-20" class="title-slide slide level1 center" data-background-image="boeing_787.jpg" data-background-size="contain" data-background-color="rgba(82,129,175)">
 <h1></h1>
 
 </section>
@@ -1443,7 +1445,7 @@ Marc-André Désautels
 <h2>Désolé pour les gens souffrant d’aviophobie…</h2>
 
 <img data-src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnVpcmM5N3JuZzZmYnlxaXhzMXM5a2hoNmZwaHBqbDFjbTVxb3lpbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AkHo4NUqzvhn9NBluB/giphy.gif" class="r-stretch"></section>
-<section id="section-20" class="slide level2">
+<section id="section-21" class="slide level2">
 <h2></h2>
 <div class="fragment">
 <blockquote>
@@ -1519,7 +1521,7 @@ Marc-André Désautels
 <h1>Missiles Patriot</h1>
 
 </section>
-<section id="section-21" class="slide level2" data-background-image="https://media1.ledevoir.com/images_galerie/nwd_1496480_1151758/image.jpg" data-background-color="black" data-background-size="contain">
+<section id="section-22" class="slide level2" data-background-image="https://media1.ledevoir.com/images_galerie/nwd_1496480_1151758/image.jpg" data-background-color="black" data-background-size="contain">
 <h2></h2>
 </section>
 <section id="missiles-patriot-1" class="slide level2">
@@ -1655,7 +1657,7 @@ N = S \times 2^{E-\text{BIAIS}} \times \left(1+\frac{M}{2^m}\right)
 </section>
 
 <section>
-<section id="section-22" class="title-slide slide level1 center">
+<section id="section-23" class="title-slide slide level1 center">
 <h1></h1>
 <iframe width="1050" height="700" src="https://www.youtube.com/embed/N6PWATvLQCY?si=kkcboVm0QZ0cqMBh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
 </iframe>
@@ -1739,13 +1741,16 @@ N = S \times 2^{E-\text{BIAIS}} \times \left(1+\frac{M}{2^m}\right)
 <span id="cb35-11"><a href=""></a>P_M_DERIVE(T_ALG.E_BH) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S</span>
 <span id="cb35-12"><a href=""></a>                                   ((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
 <span id="cb35-13"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section id="questions" class="title-slide slide level1 center" data-background-color="black">
+<h1>Questions ?</h1>
 <div class="quarto-auto-generated-content">
 <p><img src="logo-cegep.jpg" class="slide-logo"></p>
 <div class="footer footer-default">
 <p>desautm.github.io/math-catastrophe</p>
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 

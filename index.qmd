@@ -8,6 +8,7 @@ format:
     logo: logo-cegep.jpg
     footer: "desautm.github.io/math-catastrophe"
 editor: visual
+highlight-style: dracula
 title-slide-attributes:
   data-background-color: "black"
 execute:
@@ -20,7 +21,7 @@ execute:
 
 ## Les erreurs de débordement
 
-- Un dépassement d'entier (*integer overflow*) ou erreur d'opérande est, en informatique, une condition qui se produit lorsqu'une opération mathématique produit une valeur numérique supérieure à celle représentable dans l'espace de stockage disponible.
+- Un dépassement d'entier (*integer overflow*) est une condition qui se produit lorsqu'une opération mathématique produit une valeur numérique supérieure à celle représentable dans l'espace de stockage disponible.
 - Par exemple, l'ajout d'une unité au plus grand nombre pouvant être représenté entraîne un dépassement d'entier.
 
 
@@ -95,10 +96,6 @@ print(a, b)
 -   1 + 0 = 1
 
 -   1 + 1 = 10
-
-. . .
-
-avec un report de 1 à la dernière addition.
 
 . . .
 
@@ -238,7 +235,7 @@ Par exemple, en utilisant 8 bits:
 
 - Les nombres supérieurs à cette valeur ne peuvent tout simplement pas être représentés avec seulement 8 bits.
 
-- Pire encore, si une opération arithmétique produit une valeur supérieure à cette limite, il se produit un **dépassement d’entier** (en anglais *integer overflow*).
+- Pire encore, si une opération arithmétique produit une valeur supérieure à cette limite, il se produit un **dépassement d’entier**.
 
 . . .
 
@@ -373,7 +370,7 @@ for i in range(253, 259):
 
 ## NUCLEAR GANDHI
 
-- Dans le jeu original, lorsque le personnage de Gandhi (normalement extrêmement pacifique) est contrôlé par l'ordinateur, ce personnage pouvait utiliser l'arme atomique lors des conflits.
+- Dans le jeu original, lorsque le personnage de Gandhi est contrôlé par l'ordinateur, ce personnage pouvait utiliser l'arme atomique lors des conflits.
 - La valeur d'*aggressivité* de Gandhi débutait à 1 (la valeur minimale).
 - Cette valeur était stockée dans un entier non signé sur 8 bits.
 - Lorsqu'une civilisation atteint la démocratie, son aggressivité est réduite de 2.
@@ -517,6 +514,10 @@ background-color="black"}
 - Le logiciel utilisait un fanion sur 8 bits et l'incrémentait, plutôt que d'utiliser un booléen (`True` ou `False`)
 
 - Des dépassements de capacité se produisaient et engendraient la désactivation de certains tests de sécurité.
+
+# 
+
+![](Therac25.png)
 
 # Les entiers signés {background-color="black"}
 
@@ -1121,6 +1122,7 @@ for i in range(125, 131):
 
 ```{python}
 #| echo: true
+#| cache: false
 
 from pytube import YouTube
 
@@ -1132,7 +1134,7 @@ print("Visionnements:", yt.views)
 
 ## Gangnam Style
 
-- Lorsque YouTube a été développé, personne n'imaginait qu'un vidéo pourrait être regardé plus de 2 milliard de fois!
+- Lorsque YouTube a été développé, personne n'imaginait qu'une vidéo pourrait être regardée plus de 2 milliard de fois!
 - Le nombre de visionnements était stocké dans un entier signé de 32 bits.
 - Le nombre maximal représentable était donc $2^{31}-1=2\ 147\ 483\ 647$.
 
@@ -1298,7 +1300,7 @@ celui de l'an 2038
 
 - Une seconde intercalaire, est un procédé employé pour ajuster le temps universel coordonné (UTC), au temps solaire.
 
-- Sur les ordinateurs fonctionnant en 32 bits, la plupart des systèmes d'exploitation concernés représentent ce nombre comme un nombre entier signé de 32 bits, ce qui limite le nombre de secondes à $2^{31}-1$.
+- Sur les ordinateurs fonctionnant sur 32 bits, la plupart des systèmes d'exploitation concernés représentent ce nombre comme un nombre entier signé de 32 bits, ce qui limite le nombre de secondes à $2^{31}-1$.
 
 ## La représentation POSIX du temps
 
@@ -1711,3 +1713,5 @@ P_M_DERIVE(T_ALG.E_BH) := UC_16S_EN_16NS(TBD.T_ENTIER_16S
                                    ((1.0 / C_M_LSB_BH) *
                                    G_M_INFO_DERIVE(T_ALG.E_BH));
 ```
+
+# Questions ? {background-color="black"}
