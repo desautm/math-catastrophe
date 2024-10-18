@@ -1083,7 +1083,7 @@ for i in range(125, 131):
 
 # {background-image="https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png" background-color="black" background-size="contain"}
 
-# {background-image="https://upload.wikimedia.org/wikipedia/en/5/50/NES_Super_Mario_Bros.png"}
+# {background-image="https://upload.wikimedia.org/wikipedia/en/5/50/NES_Super_Mario_Bros.png" background-color="black" background-size="contain"}
 
 #
 
