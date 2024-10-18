@@ -24,7 +24,6 @@ execute:
 - Un dépassement d'entier (*integer overflow*) est une condition qui se produit lorsqu'une opération mathématique produit une valeur numérique supérieure à celle représentable dans l'espace de stockage disponible.
 - Par exemple, l'ajout d'une unité au plus grand nombre pouvant être représenté entraîne un dépassement d'entier.
 
-
 ## {background-image="https://upload.wikimedia.org/wikipedia/commons/5/53/Odometer_rollover.jpg" background-color="black" background-size="contain"}
 
 # La représentation des nombres {background-color="black"}
@@ -39,7 +38,7 @@ Un **système de numération** permet de compter des objets et de les représent
 
 -   Poids des symboles selon la position et la base, où poids=base<sup>position</sup>
 
-## Représentation polynomiale
+<!-- ## Représentation polynomiale
 
 Le système positionnel utilise la **représentation polynomiale**. Celle-ci est donnée par: 
 
@@ -49,7 +48,7 @@ $$
 \end{aligned}
 $$ 
 
-où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de votre système de numération).
+où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de votre système de numération). -->
 
 ## Représentation binaire
 
@@ -70,22 +69,6 @@ $$
 &= (335)_{10}
 \end{align}
 $$
-
-## Représentation binaire
-
--   On précède le nombre par `0b` si on veut identifier un nombre sous forme binaire en `Python`.
-
-. . .
-
-Par exemple:
-
-```{python}
-#| echo: true
-
-a = 101001111
-b = 0b101001111
-print(a, b)
-```
 
 ## L'addition en binaire
 
@@ -218,24 +201,24 @@ Par exemple, en utilisant 8 bits:
 \end{tikzpicture}
 ```
 
-## Les entiers non signés
+<!-- ## Les entiers non signés -->
 
-|          | Nombre de bits | Maximum                    |
-|----------|----------------|----------------------------|
-| `uint8`  | 8              | 255                        |
-| `uint16` | 16             | 65 535                     |
-| `uint32` | 32             | 4 294 967 295              |
-| `uint64` | 64             | 18 446 744 073 709 551 615 |
+<!-- |          | Nombre de bits | Maximum                    | -->
+<!-- |----------|----------------|----------------------------| -->
+<!-- | `uint8`  | 8              | 255                        | -->
+<!-- | `uint16` | 16             | 65 535                     | -->
+<!-- | `uint32` | 32             | 4 294 967 295              | -->
+<!-- | `uint64` | 64             | 18 446 744 073 709 551 615 | -->
 
-:  {.striped .hover}
+<!-- :  {.striped .hover} -->
 
 ## Débordement
 
 - Sur 8 bits, la plus grande valeur représentable est 255.
 
-- Les nombres supérieurs à cette valeur ne peuvent tout simplement pas être représentés avec seulement 8 bits.
+<!-- - Les nombres supérieurs à cette valeur ne peuvent tout simplement pas être représentés avec seulement 8 bits. -->
 
-- Pire encore, si une opération arithmétique produit une valeur supérieure à cette limite, il se produit un **dépassement d’entier**.
+<!-- - Pire encore, si une opération arithmétique produit une valeur supérieure à cette limite, il se produit un **dépassement d’entier**. -->
 
 . . .
 
@@ -243,7 +226,7 @@ Par exemple, en utilisant 8 bits:
 #| echo: false
 #| label: debordement_entier
 #| fig-align: center
-#| out-width: 40%
+#| out-width: 60%
 
 \usetikzlibrary{positioning}
 \begin{tikzpicture}
@@ -288,44 +271,44 @@ Par exemple, en utilisant 8 bits:
 \end{tikzpicture}
 ```
 
-## Python
+<!-- ## Python -->
 
-En `Python`, contrairement à la plupart des langages informatiques, les entiers sont représentés avec une précision infinie. C’est-à-dire que la seule limite correspond à la mémoire interne de la machine que vous utilisez. 
+<!-- En `Python`, contrairement à la plupart des langages informatiques, les entiers sont représentés avec une précision infinie. C’est-à-dire que la seule limite correspond à la mémoire interne de la machine que vous utilisez.  -->
 
-. . .
+<!-- . . . -->
 
-```{python}
-#| echo: true
-from sys import getsizeof
+<!-- ```{python} -->
+<!-- #| echo: true -->
+<!-- from sys import getsizeof -->
 
-n1 = 2**32
-n2 = 2**128
+<!-- n1 = 2**32 -->
+<!-- n2 = 2**128 -->
 
-print(getsizeof(n1), getsizeof(n2))
-```
+<!-- print(getsizeof(n1), getsizeof(n2)) -->
+<!-- ``` -->
 
-. . .
+<!-- . . . -->
 
-Par exemple, $2^{32}$ est représenté en utilisant 32 bits et $2^{128}$ est représenté en utilisant 44 bits.
+<!-- Par exemple, $2^{32}$ est représenté en utilisant 32 bits et $2^{128}$ est représenté en utilisant 44 bits. -->
 
-## Dans les autres langages
+<!-- ## Dans les autres langages -->
 
-Cependant, dans la majorité des langages informatiques, la précision de la représentation des entiers est **finie**, c’est-à-dire qu’un certain nombre de bits est alloué en mémoire pour stocker votre nombre et vous ne pouvez pas le dépasser.
+<!-- Cependant, dans la majorité des langages informatiques, la précision de la représentation des entiers est **finie**, c’est-à-dire qu’un certain nombre de bits est alloué en mémoire pour stocker votre nombre et vous ne pouvez pas le dépasser. -->
 
-. . .
+<!-- . . . -->
 
-Pour obtenir les mêmes résultats en `Python`, nous utiliserons la librarie `numpy` qui contient des formats d'entiers à précision fixe.
+<!-- Pour obtenir les mêmes résultats en `Python`, nous utiliserons la librarie `numpy` qui contient des formats d'entiers à précision fixe. -->
 
-. . .
+<!-- . . . -->
 
-```{python}
-#| echo: true
-import numpy as np
+<!-- ```{python} -->
+<!-- #| echo: true -->
+<!-- import numpy as np -->
 
-a = np.array(255).astype('uint8')
-b = np.array(256).astype('uint8')
-print(a, b)
-```
+<!-- a = np.array(255).astype('uint8') -->
+<!-- b = np.array(256).astype('uint8') -->
+<!-- print(a, b) -->
+<!-- ``` -->
 
 ## Débordement pour entiers non signés
 
@@ -437,27 +420,30 @@ background-position="left"}
 - À chaque fois qu'on dessine un fruit, on enlève 1 au compteur *fruits*, jusqu'à ce qu'on arrive à 0.
 - Le compteur *fruits* est maintenant égal à 255 et on dessine des fruits jusqu'à atteindre 0.
 
-## {background-color="black"}
+## {background-color="black" background-image="pacman_256.gif" background-size="contain"}
 
-:::: {.columns}
 
-::: {.column width="50%"}
-![](pacman_256.gif)
-:::
+<!-- ## {background-color="black"} -->
 
-::: {.column width="50%"}
-- Niveau 255;
+<!-- :::: {.columns} -->
 
-- Ajoute 1 au compteur pour arriver au compteur fruits 256;
+<!-- ::: {.column width="50%"} -->
+<!-- ![](pacman_256.gif) -->
+<!-- ::: -->
 
-- Débordement; compteur fruits 0;
+<!-- ::: {.column width="50%"} -->
+<!-- - Niveau 255; -->
 
-- Fruits; niveau moins 1; donc 255;
+<!-- - Ajoute 1 au compteur pour arriver au compteur fruits 256; -->
 
-- Dessiner 255 fruits; corruption du labyrinthe (il est prévu de dessiner au maximum 7 fruits).
-:::
+<!-- - Débordement; compteur fruits 0; -->
 
-::::
+<!-- - Fruits; niveau moins 1; donc 255; -->
+
+<!-- - Dessiner 255 fruits; corruption du labyrinthe (il est prévu de dessiner au maximum 7 fruits). -->
+<!-- ::: -->
+
+<!-- :::: -->
 
 # Les trains en Suisse {background-color="black" background-position="center"}
 
@@ -518,6 +504,31 @@ background-color="black"}
 # 
 
 ![](Therac25.png)
+
+# Donkey Kong {background-color="black"}
+
+# {background-image="Donkey_Kong_Gameplay.png" background-color="black" background-size="contain"}
+
+## Donkey Kong
+
+- Dans le jeu d'arcade Donkey Kong, il est impossible d'avancer plus loin que le niveau 22.
+- Le jeu calcul le temps/bonus en prenant le numéro du niveau, en le multipliant par 10 et en additionnant 40.
+- Lorsqu'on atteint le niveau 22, le temps/bonus est égal à 260, ce qui est plus grand que la valeur maximale de 255 (les niveaux sont stockés dans un entier non signé sur 8 bits).
+
+## Donkey Kong
+
+- Le temps/bonus devient égal à 4, ce qui est trop petit pour terminer le niveau.
+
+. . .
+
+```{python}
+#| echo: true
+import numpy as np
+
+niveau = np.array(22).astype('uint8')
+temps_bonus = np.array(niveau*10+40).astype('uint8')
+print(niveau, temps_bonus)
+```
 
 # Les entiers signés {background-color="black"}
 
@@ -723,14 +734,14 @@ Par exemple, en utilisant 8 bits:
 \end{tikzpicture}
 ```
 
-## Entiers signés
+<!-- ## Entiers signés -->
 
-|         | Nombre de bits | Minimum                     | Maximum                   |
-|---------|----------------|-----------------------------|---------------------------|
-| `int8`  | 8              | -127                        | 127                       |
-| `int16` | 16             | -32 767                     | 32 767                    |
-| `int32` | 32             | -2 147 483 647              | 2 147 483 647             |
-| `int64` | 64             | -9 223 372 036 854 775 807  | 9 223 372 036 854 775 807 |
+<!-- |         | Nombre de bits | Minimum                     | Maximum                   | -->
+<!-- |---------|----------------|-----------------------------|---------------------------| -->
+<!-- | `int8`  | 8              | -127                        | 127                       | -->
+<!-- | `int16` | 16             | -32 767                     | 32 767                    | -->
+<!-- | `int32` | 32             | -2 147 483 647              | 2 147 483 647             | -->
+<!-- | `int64` | 64             | -9 223 372 036 854 775 807  | 9 223 372 036 854 775 807 | -->
 
 ## Problème... pas trop grave
 
@@ -1046,7 +1057,7 @@ Cette opération correspond au calcul de $2^n-|x|$.
 
 ## Débordement
 
-- Contrairement aux entiers non signés, le débordement focntionne différemment avec les entiers signés, en raison du complément à deux.
+- Contrairement aux entiers non signés, le débordement fonctionne différemment avec les entiers signés, en raison du complément à deux.
 
 . . .
 
@@ -1062,7 +1073,7 @@ print(a, b, a + b)
 ## Débordement
 
 ::: {.nonincremental}
-- Contrairement aux entiers non signés, le débordement focntionne différemment avec les entiers signés, en raison du complément à deux.
+- Contrairement aux entiers non signés, le débordement fonctionne différemment avec les entiers signés, en raison du complément à deux.
 :::
 
 ```{python}
@@ -1070,7 +1081,7 @@ print(a, b, a + b)
 #| eval: false
 import numpy as np
 
-print("Valeur réelle", "Valeur non signée".rjust(20))
+print("Valeur réelle", "Valeur signée".rjust(20))
 for i in range(125, 131):
   num = np.array(i).astype('int8')
   print(f"{i:8,.0f}", f"{num:17,.0f}")
@@ -1081,7 +1092,7 @@ for i in range(125, 131):
 #| eval: true
 import numpy as np
 
-print("Valeur réelle", "Valeur non signée".rjust(20))
+print("Valeur réelle", "Valeur signée".rjust(20))
 for i in range(125, 131):
   num = np.array(i).astype('int8')
   print(f"{i:8,.0f}", f"{num:17,.0f}")
@@ -1103,6 +1114,12 @@ for i in range(125, 131):
 - Un joueur peut donc avoir 127 vies.
 - Sauf que le compteur devient un peu fou bien avant...
 
+::: {.notes}
+[Speaker notes go here.](https://themushroomkingdom.net/smb_breakdown.shtml)
+
+Niveau -1 dans SMB
+:::
+
 # {background-image="mario.png" background-color="black" background-size="contain"}
 
 # {background-image="mario-lives.png" background-color="black" background-size="contain"}
@@ -1116,21 +1133,13 @@ for i in range(125, 131):
 ## Gangnam Style
 
 - Bien qu'on ne soit plus en 2012, les gens regardent encore le vidéoclip GangNam Style de Psy sur Youtube.
-- Le code suivant permet de nous donner le nombre de visionnements, au moment où j'écris ces lignes.
+- Au moment où j'écris ces lignes, le nombre de visionnements est de ...
 
 . . .
 
-```{python}
-#| echo: true
-#| cache: false
-
-from pytube import YouTube
-
-video_url = "https://www.youtube.com/watch?v=9bZkp7q19f0"
-
-yt = YouTube(video_url)
-print("Visionnements:", yt.views)
-```
+$$
+5\ 319\ 511\ 278
+$$
 
 ## Gangnam Style
 
@@ -1221,6 +1230,8 @@ import random
 
 low = np.array(random.randint(2**30, 2**31)).astype('int32')
 high = np.array(random.randint(2**30, 2**31)).astype('int32')
+if low > high:
+  low, high = high, low
 print(low, high, round((low + high) / 2))
 ```
 
@@ -1285,6 +1296,8 @@ import random
 
 low = np.array(random.randint(2**30, 2**31)).astype('int32')
 high = np.array(random.randint(2**30, 2**31)).astype('int32')
+if low > high:
+  low, high = high, low
 print(low, high, round(low + (high - low) / 2))
 ```
 
