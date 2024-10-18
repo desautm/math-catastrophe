@@ -38,7 +38,7 @@ Un **système de numération** permet de compter des objets et de les représent
 
 -   Poids des symboles selon la position et la base, où poids=base<sup>position</sup>
 
-<!-- ## Représentation polynomiale
+## Représentation polynomiale
 
 Le système positionnel utilise la **représentation polynomiale**. Celle-ci est donnée par: 
 
@@ -48,7 +48,7 @@ $$
 \end{aligned}
 $$ 
 
-où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de votre système de numération). -->
+où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de votre système de numération).
 
 ## Représentation binaire
 
@@ -103,6 +103,26 @@ $$
 - $T_4 = 0110$
 
 - Dans la majorité des langages informatiques, les trains de bits ont une longueur prédéterminée, qu'il est impossible de dépasser.
+
+## Python
+
+En `Python`, contrairement à la plupart des langages informatiques, les entiers sont représentés avec une précision infinie. C’est-à-dire que la seule limite correspond à la mémoire interne de la machine que vous utilisez. 
+
+. . .
+
+```{python}
+#| echo: true
+from sys import getsizeof
+
+n1 = 2**32
+n2 = 2**128
+
+print(getsizeof(n1), getsizeof(n2))
+```
+
+. . . 
+
+Par exemple, $2^{32}$ est représenté en utilisant 32 bits et $2^{128}$ est représenté en utilisant 44 bits.
 
 # Les entiers non signés {background-color="black"}
 
@@ -201,16 +221,16 @@ Par exemple, en utilisant 8 bits:
 \end{tikzpicture}
 ```
 
-<!-- ## Les entiers non signés -->
+<!-- ## Les entiers non signés
 
-<!-- |          | Nombre de bits | Maximum                    | -->
-<!-- |----------|----------------|----------------------------| -->
-<!-- | `uint8`  | 8              | 255                        | -->
-<!-- | `uint16` | 16             | 65 535                     | -->
-<!-- | `uint32` | 32             | 4 294 967 295              | -->
-<!-- | `uint64` | 64             | 18 446 744 073 709 551 615 | -->
+|          | Nombre de bits | Maximum                    |
+|----------|----------------|----------------------------|
+| `uint8`  | 8              | 255                        |
+| `uint16` | 16             | 65 535                     |
+| `uint32` | 32             | 4 294 967 295              |
+| `uint64` | 64             | 18 446 744 073 709 551 615 |
 
-<!-- :  {.striped .hover} -->
+:  {.striped .hover} -->
 
 ## Débordement
 
@@ -270,45 +290,6 @@ Par exemple, en utilisant 8 bits:
 
 \end{tikzpicture}
 ```
-
-<!-- ## Python -->
-
-<!-- En `Python`, contrairement à la plupart des langages informatiques, les entiers sont représentés avec une précision infinie. C’est-à-dire que la seule limite correspond à la mémoire interne de la machine que vous utilisez.  -->
-
-<!-- . . . -->
-
-<!-- ```{python} -->
-<!-- #| echo: true -->
-<!-- from sys import getsizeof -->
-
-<!-- n1 = 2**32 -->
-<!-- n2 = 2**128 -->
-
-<!-- print(getsizeof(n1), getsizeof(n2)) -->
-<!-- ``` -->
-
-<!-- . . . -->
-
-<!-- Par exemple, $2^{32}$ est représenté en utilisant 32 bits et $2^{128}$ est représenté en utilisant 44 bits. -->
-
-<!-- ## Dans les autres langages -->
-
-<!-- Cependant, dans la majorité des langages informatiques, la précision de la représentation des entiers est **finie**, c’est-à-dire qu’un certain nombre de bits est alloué en mémoire pour stocker votre nombre et vous ne pouvez pas le dépasser. -->
-
-<!-- . . . -->
-
-<!-- Pour obtenir les mêmes résultats en `Python`, nous utiliserons la librarie `numpy` qui contient des formats d'entiers à précision fixe. -->
-
-<!-- . . . -->
-
-<!-- ```{python} -->
-<!-- #| echo: true -->
-<!-- import numpy as np -->
-
-<!-- a = np.array(255).astype('uint8') -->
-<!-- b = np.array(256).astype('uint8') -->
-<!-- print(a, b) -->
-<!-- ``` -->
 
 ## Débordement pour entiers non signés
 

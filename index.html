@@ -434,17 +434,16 @@ Marc-André Désautels
 <li class="fragment"><p>Symboles (digits) : 0, 1, 2, …, <span class="math inline">\(b-1\)</span></p></li>
 <li class="fragment"><p>Poids des symboles selon la position et la base, où poids=base<sup>position</sup></p></li>
 </ul>
-<!-- ## Représentation polynomiale
-
-Le système positionnel utilise la **représentation polynomiale**. Celle-ci est donnée par: 
-
-$$
+</section>
+<section id="représentation-polynomiale" class="slide level2">
+<h2>Représentation polynomiale</h2>
+<p>Le système positionnel utilise la <strong>représentation polynomiale</strong>. Celle-ci est donnée par:</p>
+<p><span class="math display">\[
 \begin{aligned}
-(a_na_{n-1}\cdots a_1a_0,a_{-1}a_{-2}\cdots a_{-m})_b &= \sum_{k=-m}^n a_k b^k
+(a_na_{n-1}\cdots a_1a_0,a_{-1}a_{-2}\cdots a_{-m})_b &amp;= \sum_{k=-m}^n a_k b^k
 \end{aligned}
-$$ 
-
-où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de votre système de numération). -->
+\]</span></p>
+<p>où <span class="math inline">\(b\)</span> est la <strong>base</strong> et les <span class="math inline">\(a_i\)</span> sont des <strong>coefficients</strong> (les symboles de votre système de numération).</p>
 </section>
 <section id="représentation-binaire" class="slide level2">
 <h2>Représentation binaire</h2>
@@ -493,6 +492,26 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <li class="fragment"><p><span class="math inline">\(T_4 = 0110\)</span></p></li>
 <li class="fragment"><p>Dans la majorité des langages informatiques, les trains de bits ont une longueur prédéterminée, qu’il est impossible de dépasser.</p></li>
 </ul>
+</section>
+<section id="python" class="slide level2">
+<h2>Python</h2>
+<p>En <code>Python</code>, contrairement à la plupart des langages informatiques, les entiers sont représentés avec une précision infinie. C’est-à-dire que la seule limite correspond à la mémoire interne de la machine que vous utilisez.</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">from</span> sys <span class="im">import</span> getsizeof</span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a>n1 <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">32</span></span>
+<span id="cb1-4"><a href=""></a>n2 <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">128</span></span>
+<span id="cb1-5"><a href=""></a></span>
+<span id="cb1-6"><a href=""></a><span class="bu">print</span>(getsizeof(n1), getsizeof(n2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>32 44</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Par exemple, <span class="math inline">\(2^{32}\)</span> est représenté en utilisant 32 bits et <span class="math inline">\(2^{128}\)</span> est représenté en utilisant 44 bits.</p>
+</div>
 </section></section>
 <section>
 <section id="les-entiers-non-signés" class="title-slide slide level1 center" data-background-color="black">
@@ -522,7 +541,7 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -545,19 +564,21 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
-<!-- ## Les entiers non signés -->
-<!-- |          | Nombre de bits | Maximum                    | -->
-<!-- |----------|----------------|----------------------------| -->
-<!-- | `uint8`  | 8              | 255                        | -->
-<!-- | `uint16` | 16             | 65 535                     | -->
-<!-- | `uint32` | 32             | 4 294 967 295              | -->
-<!-- | `uint64` | 64             | 18 446 744 073 709 551 615 | -->
-<!-- :  {.striped .hover} -->
+<!-- ## Les entiers non signés
+
+|          | Nombre de bits | Maximum                    |
+|----------|----------------|----------------------------|
+| `uint8`  | 8              | 255                        |
+| `uint16` | 16             | 65 535                     |
+| `uint32` | 32             | 4 294 967 295              |
+| `uint64` | 64             | 18 446 744 073 709 551 615 |
+
+:  {.striped .hover} -->
 </div>
 </section>
 <section id="débordement" class="slide level2">
@@ -577,42 +598,18 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 </div>
 </div>
 </div>
-<!-- ## Python -->
-<!-- En `Python`, contrairement à la plupart des langages informatiques, les entiers sont représentés avec une précision infinie. C’est-à-dire que la seule limite correspond à la mémoire interne de la machine que vous utilisez.  -->
-<!-- . . . -->
-<!-- ```{python} -->
-<!-- #| echo: true -->
-<!-- from sys import getsizeof -->
-<!-- n1 = 2**32 -->
-<!-- n2 = 2**128 -->
-<!-- print(getsizeof(n1), getsizeof(n2)) -->
-<!-- ``` -->
-<!-- . . . -->
-<!-- Par exemple, $2^{32}$ est représenté en utilisant 32 bits et $2^{128}$ est représenté en utilisant 44 bits. -->
-<!-- ## Dans les autres langages -->
-<!-- Cependant, dans la majorité des langages informatiques, la précision de la représentation des entiers est **finie**, c’est-à-dire qu’un certain nombre de bits est alloué en mémoire pour stocker votre nombre et vous ne pouvez pas le dépasser. -->
-<!-- . . . -->
-<!-- Pour obtenir les mêmes résultats en `Python`, nous utiliserons la librarie `numpy` qui contient des formats d'entiers à précision fixe. -->
-<!-- . . . -->
-<!-- ```{python} -->
-<!-- #| echo: true -->
-<!-- import numpy as np -->
-<!-- a = np.array(255).astype('uint8') -->
-<!-- b = np.array(256).astype('uint8') -->
-<!-- print(a, b) -->
-<!-- ``` -->
 </div>
 </section>
 <section id="débordement-pour-entiers-non-signés" class="slide level2">
 <h2>Débordement pour entiers non signés</h2>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href=""></a></span>
-<span id="cb1-3"><a href=""></a><span class="bu">print</span>(<span class="st">"Valeur réelle"</span>, <span class="st">"Valeur non signée"</span>.rjust(<span class="dv">20</span>))</span>
-<span id="cb1-4"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">253</span>, <span class="dv">259</span>):</span>
-<span id="cb1-5"><a href=""></a>  num <span class="op">=</span> np.array(i).astype(<span class="st">'uint8'</span>)</span>
-<span id="cb1-6"><a href=""></a>  <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">:8,.0f}</span><span class="ss">"</span>, <span class="ss">f"</span><span class="sc">{</span>num<span class="sc">:17,.0f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href=""></a></span>
+<span id="cb3-3"><a href=""></a><span class="bu">print</span>(<span class="st">"Valeur réelle"</span>, <span class="st">"Valeur non signée"</span>.rjust(<span class="dv">20</span>))</span>
+<span id="cb3-4"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">253</span>, <span class="dv">259</span>):</span>
+<span id="cb3-5"><a href=""></a>  num <span class="op">=</span> np.array(i).astype(<span class="st">'uint8'</span>)</span>
+<span id="cb3-6"><a href=""></a>  <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">:8,.0f}</span><span class="ss">"</span>, <span class="ss">f"</span><span class="sc">{</span>num<span class="sc">:17,.0f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -667,11 +664,11 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <section id="nuclear-gandhi-2" class="slide level2">
 <h2>NUCLEAR GANDHI</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb4-2"><a href=""></a></span>
-<span id="cb4-3"><a href=""></a>aggressivite <span class="op">=</span> np.array(<span class="dv">1</span>).astype(<span class="st">'uint8'</span>)</span>
-<span id="cb4-4"><a href=""></a>democratie <span class="op">=</span> np.array(<span class="dv">2</span>).astype(<span class="st">'uint8'</span>)</span>
-<span id="cb4-5"><a href=""></a><span class="bu">print</span>(aggressivite<span class="op">-</span>democratie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-2"><a href=""></a></span>
+<span id="cb6-3"><a href=""></a>aggressivite <span class="op">=</span> np.array(<span class="dv">1</span>).astype(<span class="st">'uint8'</span>)</span>
+<span id="cb6-4"><a href=""></a>democratie <span class="op">=</span> np.array(<span class="dv">2</span>).astype(<span class="st">'uint8'</span>)</span>
+<span id="cb6-5"><a href=""></a><span class="bu">print</span>(aggressivite<span class="op">-</span>democratie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>255</code></pre>
 </div>
@@ -680,11 +677,11 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <section id="nuclear-gandhi-3" class="slide level2">
 <h2><del>NUCLEAR GANDHI</del></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-2"><a href=""></a></span>
-<span id="cb6-3"><a href=""></a>aggressivite <span class="op">=</span> np.array(<span class="dv">1</span>).astype(<span class="st">'uint8'</span>)</span>
-<span id="cb6-4"><a href=""></a>democratie <span class="op">=</span> np.array(<span class="dv">2</span>).astype(<span class="st">'uint8'</span>)</span>
-<span id="cb6-5"><a href=""></a><span class="bu">print</span>(aggressivite<span class="op">-</span>democratie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-2"><a href=""></a></span>
+<span id="cb8-3"><a href=""></a>aggressivite <span class="op">=</span> np.array(<span class="dv">1</span>).astype(<span class="st">'uint8'</span>)</span>
+<span id="cb8-4"><a href=""></a>democratie <span class="op">=</span> np.array(<span class="dv">2</span>).astype(<span class="st">'uint8'</span>)</span>
+<span id="cb8-5"><a href=""></a><span class="bu">print</span>(aggressivite<span class="op">-</span>democratie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>255</code></pre>
 </div>
@@ -865,11 +862,11 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-2"><a href=""></a></span>
-<span id="cb8-3"><a href=""></a>niveau <span class="op">=</span> np.array(<span class="dv">22</span>).astype(<span class="st">'uint8'</span>)</span>
-<span id="cb8-4"><a href=""></a>temps_bonus <span class="op">=</span> np.array(niveau<span class="op">*</span><span class="dv">10</span><span class="op">+</span><span class="dv">40</span>).astype(<span class="st">'uint8'</span>)</span>
-<span id="cb8-5"><a href=""></a><span class="bu">print</span>(niveau, temps_bonus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-2"><a href=""></a></span>
+<span id="cb10-3"><a href=""></a>niveau <span class="op">=</span> np.array(<span class="dv">22</span>).astype(<span class="st">'uint8'</span>)</span>
+<span id="cb10-4"><a href=""></a>temps_bonus <span class="op">=</span> np.array(niveau<span class="op">*</span><span class="dv">10</span><span class="op">+</span><span class="dv">40</span>).astype(<span class="st">'uint8'</span>)</span>
+<span id="cb10-5"><a href=""></a><span class="bu">print</span>(niveau, temps_bonus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>22 4</code></pre>
 </div>
@@ -904,7 +901,7 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -928,7 +925,7 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 </div>
 <p>Par exemple sur huit bits:</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="entiers-signés-4" class="slide level2">
 <h2>Entiers signés</h2>
 <p><span class="math display">\[\begin{gather}
@@ -941,7 +938,7 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -963,7 +960,7 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <!-- | `int16` | 16             | -32 767                     | 32 767                    | -->
 <!-- | `int32` | 32             | -2 147 483 647              | 2 147 483 647             | -->
 <!-- | `int64` | 64             | -9 223 372 036 854 775 807  | 9 223 372 036 854 775 807 | -->
-<img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
 <section id="problème-pas-trop-grave" class="slide level2">
 <h2>Problème… pas trop grave</h2>
 <ul>
@@ -974,7 +971,7 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -985,7 +982,7 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1002,7 +999,7 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
@@ -1029,11 +1026,11 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <section id="le-complément-à-deux-1" class="slide level2">
 <h2>Le complément à deux</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
 <section id="le-complément-à-deux-2" class="slide level2">
 <h2>Le complément à deux</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
 <section id="débordement-1" class="slide level2">
 <h2>Débordement</h2>
 <ul>
@@ -1041,11 +1038,11 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb10-2"><a href=""></a></span>
-<span id="cb10-3"><a href=""></a>a <span class="op">=</span> np.array(<span class="dv">127</span>).astype(<span class="st">'int8'</span>)</span>
-<span id="cb10-4"><a href=""></a>b <span class="op">=</span> np.array(<span class="dv">1</span>).astype(<span class="st">'int8'</span>)</span>
-<span id="cb10-5"><a href=""></a><span class="bu">print</span>(a, b, a <span class="op">+</span> b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-2"><a href=""></a></span>
+<span id="cb12-3"><a href=""></a>a <span class="op">=</span> np.array(<span class="dv">127</span>).astype(<span class="st">'int8'</span>)</span>
+<span id="cb12-4"><a href=""></a>b <span class="op">=</span> np.array(<span class="dv">1</span>).astype(<span class="st">'int8'</span>)</span>
+<span id="cb12-5"><a href=""></a><span class="bu">print</span>(a, b, a <span class="op">+</span> b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>127 1 -128</code></pre>
 </div>
@@ -1060,12 +1057,12 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 </ul>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb12-2"><a href=""></a></span>
-<span id="cb12-3"><a href=""></a><span class="bu">print</span>(<span class="st">"Valeur réelle"</span>, <span class="st">"Valeur signée"</span>.rjust(<span class="dv">20</span>))</span>
-<span id="cb12-4"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">125</span>, <span class="dv">131</span>):</span>
-<span id="cb12-5"><a href=""></a>  num <span class="op">=</span> np.array(i).astype(<span class="st">'int8'</span>)</span>
-<span id="cb12-6"><a href=""></a>  <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">:8,.0f}</span><span class="ss">"</span>, <span class="ss">f"</span><span class="sc">{</span>num<span class="sc">:17,.0f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb14-2"><a href=""></a></span>
+<span id="cb14-3"><a href=""></a><span class="bu">print</span>(<span class="st">"Valeur réelle"</span>, <span class="st">"Valeur signée"</span>.rjust(<span class="dv">20</span>))</span>
+<span id="cb14-4"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">125</span>, <span class="dv">131</span>):</span>
+<span id="cb14-5"><a href=""></a>  num <span class="op">=</span> np.array(i).astype(<span class="st">'int8'</span>)</span>
+<span id="cb14-6"><a href=""></a>  <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">:8,.0f}</span><span class="ss">"</span>, <span class="ss">f"</span><span class="sc">{</span>num<span class="sc">:17,.0f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -1165,11 +1162,11 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb15-2"><a href=""></a></span>
-<span id="cb15-3"><a href=""></a><span class="bu">max</span> <span class="op">=</span> np.array(<span class="dv">2</span><span class="op">**</span><span class="dv">31</span><span class="op">-</span><span class="dv">1</span>).astype(<span class="st">'int32'</span>)</span>
-<span id="cb15-4"><a href=""></a>un  <span class="op">=</span> np.array(<span class="dv">1</span>).astype(<span class="st">'int32'</span>)</span>
-<span id="cb15-5"><a href=""></a><span class="bu">print</span>(<span class="bu">max</span><span class="op">+</span>un)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-2"><a href=""></a></span>
+<span id="cb17-3"><a href=""></a><span class="bu">max</span> <span class="op">=</span> np.array(<span class="dv">2</span><span class="op">**</span><span class="dv">31</span><span class="op">-</span><span class="dv">1</span>).astype(<span class="st">'int32'</span>)</span>
+<span id="cb17-4"><a href=""></a>un  <span class="op">=</span> np.array(<span class="dv">1</span>).astype(<span class="st">'int32'</span>)</span>
+<span id="cb17-5"><a href=""></a><span class="bu">print</span>(<span class="bu">max</span><span class="op">+</span>un)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>-2147483648</code></pre>
 </div>
@@ -1199,27 +1196,27 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 </section>
 <section id="le-bogue" class="slide level2">
 <h2>Le bogue</h2>
-<div class="sourceCode" id="cb17" data-code-line-numbers="|6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb17-1"><a href=""></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> a<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb17-2"><a href=""></a>        <span class="dt">int</span> low <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb17-3"><a href=""></a>        <span class="dt">int</span> high <span class="op">=</span> a<span class="op">.</span><span class="fu">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb17-4"><a href=""></a></span>
-<span id="cb17-5"><a href=""></a>        <span class="cf">while</span> <span class="op">(</span>low <span class="op">&lt;=</span> high<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb17-6"><a href=""></a>            <span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb17-7"><a href=""></a>            <span class="dt">int</span> midVal <span class="op">=</span> a<span class="op">[</span>mid<span class="op">];</span></span>
-<span id="cb17-8"><a href=""></a></span>
-<span id="cb17-9"><a href=""></a>            <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&lt;</span> key<span class="op">)</span></span>
-<span id="cb17-10"><a href=""></a>                low <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb17-11"><a href=""></a>            <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&gt;</span> key<span class="op">)</span></span>
-<span id="cb17-12"><a href=""></a>                high <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb17-13"><a href=""></a>            <span class="cf">else</span></span>
-<span id="cb17-14"><a href=""></a>                <span class="cf">return</span> mid<span class="op">;</span> <span class="co">// key found</span></span>
-<span id="cb17-15"><a href=""></a>        <span class="op">}</span></span>
-<span id="cb17-16"><a href=""></a>        <span class="cf">return</span> <span class="op">-(</span>low <span class="op">+</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// key not found.</span></span>
-<span id="cb17-17"><a href=""></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19" data-code-line-numbers="|6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb19-1"><a href=""></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> a<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-2"><a href=""></a>        <span class="dt">int</span> low <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb19-3"><a href=""></a>        <span class="dt">int</span> high <span class="op">=</span> a<span class="op">.</span><span class="fu">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb19-4"><a href=""></a></span>
+<span id="cb19-5"><a href=""></a>        <span class="cf">while</span> <span class="op">(</span>low <span class="op">&lt;=</span> high<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-6"><a href=""></a>            <span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb19-7"><a href=""></a>            <span class="dt">int</span> midVal <span class="op">=</span> a<span class="op">[</span>mid<span class="op">];</span></span>
+<span id="cb19-8"><a href=""></a></span>
+<span id="cb19-9"><a href=""></a>            <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&lt;</span> key<span class="op">)</span></span>
+<span id="cb19-10"><a href=""></a>                low <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb19-11"><a href=""></a>            <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&gt;</span> key<span class="op">)</span></span>
+<span id="cb19-12"><a href=""></a>                high <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb19-13"><a href=""></a>            <span class="cf">else</span></span>
+<span id="cb19-14"><a href=""></a>                <span class="cf">return</span> mid<span class="op">;</span> <span class="co">// key found</span></span>
+<span id="cb19-15"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb19-16"><a href=""></a>        <span class="cf">return</span> <span class="op">-(</span>low <span class="op">+</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// key not found.</span></span>
+<span id="cb19-17"><a href=""></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="le-bogue-1" class="slide level2">
 <h2>Le bogue</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li class="fragment"><p>Les entiers dans <code>Java</code> sont codés sur 32 bits.</p></li>
 <li class="fragment"><p>Le bug apparaît si la somme de <code>low</code> et <code>high</code> est plus grande que la valeur maximum possible pour un entier signé dans <code>Java</code>, <span class="math inline">\(2^{31}-1\)</span>.</p></li>
@@ -1229,84 +1226,84 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 </section>
 <section id="le-bogue-2" class="slide level2">
 <h2>Le bogue</h2>
-<div class="sourceCode" id="cb19"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li class="fragment">En tentant de répliquer le bogue en <code>Python</code>:</li>
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb20-2"><a href=""></a><span class="im">import</span> random</span>
-<span id="cb20-3"><a href=""></a></span>
-<span id="cb20-4"><a href=""></a>low <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
-<span id="cb20-5"><a href=""></a>high <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
-<span id="cb20-6"><a href=""></a><span class="cf">if</span> low <span class="op">&gt;</span> high:</span>
-<span id="cb20-7"><a href=""></a>  low, high <span class="op">=</span> high, low</span>
-<span id="cb20-8"><a href=""></a><span class="bu">print</span>(low, high, <span class="bu">round</span>((low <span class="op">+</span> high) <span class="op">/</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb22-2"><a href=""></a><span class="im">import</span> random</span>
+<span id="cb22-3"><a href=""></a></span>
+<span id="cb22-4"><a href=""></a>low <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
+<span id="cb22-5"><a href=""></a>high <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
+<span id="cb22-6"><a href=""></a><span class="cf">if</span> low <span class="op">&gt;</span> high:</span>
+<span id="cb22-7"><a href=""></a>  low, high <span class="op">=</span> high, low</span>
+<span id="cb22-8"><a href=""></a><span class="bu">print</span>(low, high, <span class="bu">round</span>((low <span class="op">+</span> high) <span class="op">/</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1733125201 2057557119 -252142488</code></pre>
+<pre><code>1845949789 2038617542 -205199982</code></pre>
 </div>
 </div>
 </div>
 </section>
 <section id="le-bogue-corrigé" class="slide level2">
 <h2>Le bogue… corrigé</h2>
-<div class="sourceCode" id="cb22" data-code-line-numbers="6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb22-1"><a href=""></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> a<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb22-2"><a href=""></a>        <span class="dt">int</span> low <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb22-3"><a href=""></a>        <span class="dt">int</span> high <span class="op">=</span> a<span class="op">.</span><span class="fu">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb22-4"><a href=""></a></span>
-<span id="cb22-5"><a href=""></a>        <span class="cf">while</span> <span class="op">(</span>low <span class="op">&lt;=</span> high<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb22-6"><a href=""></a>            <span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb22-7"><a href=""></a>            <span class="dt">int</span> midVal <span class="op">=</span> a<span class="op">[</span>mid<span class="op">];</span></span>
-<span id="cb22-8"><a href=""></a></span>
-<span id="cb22-9"><a href=""></a>            <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&lt;</span> key<span class="op">)</span></span>
-<span id="cb22-10"><a href=""></a>                low <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb22-11"><a href=""></a>            <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&gt;</span> key<span class="op">)</span></span>
-<span id="cb22-12"><a href=""></a>                high <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb22-13"><a href=""></a>            <span class="cf">else</span></span>
-<span id="cb22-14"><a href=""></a>                <span class="cf">return</span> mid<span class="op">;</span> <span class="co">// key found</span></span>
-<span id="cb22-15"><a href=""></a>        <span class="op">}</span></span>
-<span id="cb22-16"><a href=""></a>        <span class="cf">return</span> <span class="op">-(</span>low <span class="op">+</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// key not found.</span></span>
-<span id="cb22-17"><a href=""></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24" data-code-line-numbers="6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb24-1"><a href=""></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> a<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-2"><a href=""></a>        <span class="dt">int</span> low <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb24-3"><a href=""></a>        <span class="dt">int</span> high <span class="op">=</span> a<span class="op">.</span><span class="fu">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb24-4"><a href=""></a></span>
+<span id="cb24-5"><a href=""></a>        <span class="cf">while</span> <span class="op">(</span>low <span class="op">&lt;=</span> high<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-6"><a href=""></a>            <span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>low <span class="op">+</span> high<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb24-7"><a href=""></a>            <span class="dt">int</span> midVal <span class="op">=</span> a<span class="op">[</span>mid<span class="op">];</span></span>
+<span id="cb24-8"><a href=""></a></span>
+<span id="cb24-9"><a href=""></a>            <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&lt;</span> key<span class="op">)</span></span>
+<span id="cb24-10"><a href=""></a>                low <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb24-11"><a href=""></a>            <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&gt;</span> key<span class="op">)</span></span>
+<span id="cb24-12"><a href=""></a>                high <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb24-13"><a href=""></a>            <span class="cf">else</span></span>
+<span id="cb24-14"><a href=""></a>                <span class="cf">return</span> mid<span class="op">;</span> <span class="co">// key found</span></span>
+<span id="cb24-15"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb24-16"><a href=""></a>        <span class="cf">return</span> <span class="op">-(</span>low <span class="op">+</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// key not found.</span></span>
+<span id="cb24-17"><a href=""></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="le-bogue-corrigé-1" class="slide level2">
 <h2>Le bogue… corrigé</h2>
-<div class="sourceCode" id="cb23" data-code-line-numbers="6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb23-1"><a href=""></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> a<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb23-2"><a href=""></a>        <span class="dt">int</span> low <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb23-3"><a href=""></a>        <span class="dt">int</span> high <span class="op">=</span> a<span class="op">.</span><span class="fu">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb23-4"><a href=""></a></span>
-<span id="cb23-5"><a href=""></a>        <span class="cf">while</span> <span class="op">(</span>low <span class="op">&lt;=</span> high<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb23-6"><a href=""></a>            <span class="dt">int</span> mid <span class="op">=</span> low <span class="op">+</span> <span class="op">((</span>high <span class="op">-</span> low<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">);</span></span>
-<span id="cb23-7"><a href=""></a>            <span class="dt">int</span> midVal <span class="op">=</span> a<span class="op">[</span>mid<span class="op">];</span></span>
-<span id="cb23-8"><a href=""></a></span>
-<span id="cb23-9"><a href=""></a>            <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&lt;</span> key<span class="op">)</span></span>
-<span id="cb23-10"><a href=""></a>                low <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb23-11"><a href=""></a>            <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&gt;</span> key<span class="op">)</span></span>
-<span id="cb23-12"><a href=""></a>                high <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb23-13"><a href=""></a>            <span class="cf">else</span></span>
-<span id="cb23-14"><a href=""></a>                <span class="cf">return</span> mid<span class="op">;</span> <span class="co">// key found</span></span>
-<span id="cb23-15"><a href=""></a>        <span class="op">}</span></span>
-<span id="cb23-16"><a href=""></a>        <span class="cf">return</span> <span class="op">-(</span>low <span class="op">+</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// key not found.</span></span>
-<span id="cb23-17"><a href=""></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25" data-code-line-numbers="6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb25-1"><a href=""></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">binarySearch</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> a<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb25-2"><a href=""></a>        <span class="dt">int</span> low <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb25-3"><a href=""></a>        <span class="dt">int</span> high <span class="op">=</span> a<span class="op">.</span><span class="fu">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb25-4"><a href=""></a></span>
+<span id="cb25-5"><a href=""></a>        <span class="cf">while</span> <span class="op">(</span>low <span class="op">&lt;=</span> high<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb25-6"><a href=""></a>            <span class="dt">int</span> mid <span class="op">=</span> low <span class="op">+</span> <span class="op">((</span>high <span class="op">-</span> low<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb25-7"><a href=""></a>            <span class="dt">int</span> midVal <span class="op">=</span> a<span class="op">[</span>mid<span class="op">];</span></span>
+<span id="cb25-8"><a href=""></a></span>
+<span id="cb25-9"><a href=""></a>            <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&lt;</span> key<span class="op">)</span></span>
+<span id="cb25-10"><a href=""></a>                low <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb25-11"><a href=""></a>            <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>midVal <span class="op">&gt;</span> key<span class="op">)</span></span>
+<span id="cb25-12"><a href=""></a>                high <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb25-13"><a href=""></a>            <span class="cf">else</span></span>
+<span id="cb25-14"><a href=""></a>                <span class="cf">return</span> mid<span class="op">;</span> <span class="co">// key found</span></span>
+<span id="cb25-15"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb25-16"><a href=""></a>        <span class="cf">return</span> <span class="op">-(</span>low <span class="op">+</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// key not found.</span></span>
+<span id="cb25-17"><a href=""></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="le-bogue-corrigé-2" class="slide level2">
 <h2>Le bogue… corrigé</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mid <span class="op">=</span> low <span class="op">+</span> <span class="op">((</span>high <span class="op">-</span> low<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mid <span class="op">=</span> low <span class="op">+</span> <span class="op">((</span>high <span class="op">-</span> low<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li class="fragment">En <code>Python</code>:</li>
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb25-2"><a href=""></a><span class="im">import</span> random</span>
-<span id="cb25-3"><a href=""></a></span>
-<span id="cb25-4"><a href=""></a>low <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
-<span id="cb25-5"><a href=""></a>high <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
-<span id="cb25-6"><a href=""></a><span class="cf">if</span> low <span class="op">&gt;</span> high:</span>
-<span id="cb25-7"><a href=""></a>  low, high <span class="op">=</span> high, low</span>
-<span id="cb25-8"><a href=""></a><span class="bu">print</span>(low, high, <span class="bu">round</span>(low <span class="op">+</span> (high <span class="op">-</span> low) <span class="op">/</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb27-2"><a href=""></a><span class="im">import</span> random</span>
+<span id="cb27-3"><a href=""></a></span>
+<span id="cb27-4"><a href=""></a>low <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
+<span id="cb27-5"><a href=""></a>high <span class="op">=</span> np.array(random.randint(<span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)).astype(<span class="st">'int32'</span>)</span>
+<span id="cb27-6"><a href=""></a><span class="cf">if</span> low <span class="op">&gt;</span> high:</span>
+<span id="cb27-7"><a href=""></a>  low, high <span class="op">=</span> high, low</span>
+<span id="cb27-8"><a href=""></a><span class="bu">print</span>(low, high, <span class="bu">round</span>(low <span class="op">+</span> (high <span class="op">-</span> low) <span class="op">/</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1810889455 1885961354 1848425404</code></pre>
+<pre><code>1819583737 2142169831 1980876784</code></pre>
 </div>
 </div>
 </div>
@@ -1436,7 +1433,7 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <section id="virgule-fixe-1" class="slide level2">
 <h2>Virgule fixe</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
 <section id="quelques-exemples" class="slide level2">
 <h2>Quelques exemples</h2>
 <ul>
@@ -1572,7 +1569,7 @@ où $b$ est la **base** et les $a_i$ sont des **coefficients** (les symboles de 
 <section id="la-norme-ieee-754" class="slide level2">
 <h2>La norme IEEE 754</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section>
 <section id="la-norme-ieee-754-1" class="slide level2">
 <h2>La norme IEEE 754</h2>
 <ul>
@@ -1644,42 +1641,7 @@ N = S \times 2^{E-\text{BIAIS}} \times \left(1+\frac{M}{2^m}\right)
 <h2>Ariane 5</h2>
 <p>Le code problématique:</p>
 <div class="fragment">
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource fortran number-lines code-with-copy"><code class="sourceCode fortranfixed"><span id="cb27-1"><a href=""></a>L_M_BV_32 :<span class="kw">=</span> TBD.T_ENTIER_16S((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
-<span id="cb27-2"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span>
-<span id="cb27-3"><a href=""></a><span class="kw">if</span> L_M_BV_32 <span class="op">&gt;</span> <span class="dv">32767</span> <span class="kw">then</span></span>
-<span id="cb27-4"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">7</span>FFF#;</span>
-<span id="cb27-5"><a href=""></a><span class="kw">elseif</span> L_M_BV_32 <span class="op">&lt;</span> <span class="kw">-</span><span class="dv">32768</span> <span class="kw">then</span></span>
-<span id="cb27-6"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">8000</span>#;</span>
-<span id="cb27-7"><a href=""></a><span class="kw">else</span></span>
-<span id="cb27-8"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S(L_M_BV_32));</span>
-<span id="cb27-9"><a href=""></a><span class="kw">end if</span>;</span>
-<span id="cb27-10"><a href=""></a></span>
-<span id="cb27-11"><a href=""></a>P_M_DERIVE(T_ALG.E_BH) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S</span>
-<span id="cb27-12"><a href=""></a>                                   ((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
-<span id="cb27-13"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="ariane-5-5" class="slide level2">
-<h2>Ariane 5</h2>
-<p>Le cas de l’accélération verticale est évalué correctement.</p>
-<div class="sourceCode" id="cb28" data-code-line-numbers="1-9"><pre class="sourceCode numberSource fortran number-lines code-with-copy"><code class="sourceCode fortranfixed"><span id="cb28-1"><a href=""></a>L_M_BV_32 :<span class="kw">=</span> TBD.T_ENTIER_16S((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
-<span id="cb28-2"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span>
-<span id="cb28-3"><a href=""></a><span class="kw">if</span> L_M_BV_32 <span class="op">&gt;</span> <span class="dv">32767</span> <span class="kw">then</span></span>
-<span id="cb28-4"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">7</span>FFF#;</span>
-<span id="cb28-5"><a href=""></a><span class="kw">elseif</span> L_M_BV_32 <span class="op">&lt;</span> <span class="kw">-</span><span class="dv">32768</span> <span class="kw">then</span></span>
-<span id="cb28-6"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">8000</span>#;</span>
-<span id="cb28-7"><a href=""></a><span class="kw">else</span></span>
-<span id="cb28-8"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S(L_M_BV_32));</span>
-<span id="cb28-9"><a href=""></a><span class="kw">end if</span>;</span>
-<span id="cb28-10"><a href=""></a></span>
-<span id="cb28-11"><a href=""></a>P_M_DERIVE(T_ALG.E_BH) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S</span>
-<span id="cb28-12"><a href=""></a>                                   ((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
-<span id="cb28-13"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="ariane-5-6" class="slide level2">
-<h2>Ariane 5</h2>
-<p>Le cas de l’accélération horizontale ne l’est pas…</p>
-<div class="sourceCode" id="cb29" data-code-line-numbers="11-13"><pre class="sourceCode numberSource fortran number-lines code-with-copy"><code class="sourceCode fortranfixed"><span id="cb29-1"><a href=""></a>L_M_BV_32 :<span class="kw">=</span> TBD.T_ENTIER_16S((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource fortran number-lines code-with-copy"><code class="sourceCode fortranfixed"><span id="cb29-1"><a href=""></a>L_M_BV_32 :<span class="kw">=</span> TBD.T_ENTIER_16S((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
 <span id="cb29-2"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span>
 <span id="cb29-3"><a href=""></a><span class="kw">if</span> L_M_BV_32 <span class="op">&gt;</span> <span class="dv">32767</span> <span class="kw">then</span></span>
 <span id="cb29-4"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">7</span>FFF#;</span>
@@ -1692,6 +1654,41 @@ N = S \times 2^{E-\text{BIAIS}} \times \left(1+\frac{M}{2^m}\right)
 <span id="cb29-11"><a href=""></a>P_M_DERIVE(T_ALG.E_BH) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S</span>
 <span id="cb29-12"><a href=""></a>                                   ((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
 <span id="cb29-13"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ariane-5-5" class="slide level2">
+<h2>Ariane 5</h2>
+<p>Le cas de l’accélération verticale est évalué correctement.</p>
+<div class="sourceCode" id="cb30" data-code-line-numbers="1-9"><pre class="sourceCode numberSource fortran number-lines code-with-copy"><code class="sourceCode fortranfixed"><span id="cb30-1"><a href=""></a>L_M_BV_32 :<span class="kw">=</span> TBD.T_ENTIER_16S((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
+<span id="cb30-2"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span>
+<span id="cb30-3"><a href=""></a><span class="kw">if</span> L_M_BV_32 <span class="op">&gt;</span> <span class="dv">32767</span> <span class="kw">then</span></span>
+<span id="cb30-4"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">7</span>FFF#;</span>
+<span id="cb30-5"><a href=""></a><span class="kw">elseif</span> L_M_BV_32 <span class="op">&lt;</span> <span class="kw">-</span><span class="dv">32768</span> <span class="kw">then</span></span>
+<span id="cb30-6"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">8000</span>#;</span>
+<span id="cb30-7"><a href=""></a><span class="kw">else</span></span>
+<span id="cb30-8"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S(L_M_BV_32));</span>
+<span id="cb30-9"><a href=""></a><span class="kw">end if</span>;</span>
+<span id="cb30-10"><a href=""></a></span>
+<span id="cb30-11"><a href=""></a>P_M_DERIVE(T_ALG.E_BH) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S</span>
+<span id="cb30-12"><a href=""></a>                                   ((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
+<span id="cb30-13"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="ariane-5-6" class="slide level2">
+<h2>Ariane 5</h2>
+<p>Le cas de l’accélération horizontale ne l’est pas…</p>
+<div class="sourceCode" id="cb31" data-code-line-numbers="11-13"><pre class="sourceCode numberSource fortran number-lines code-with-copy"><code class="sourceCode fortranfixed"><span id="cb31-1"><a href=""></a>L_M_BV_32 :<span class="kw">=</span> TBD.T_ENTIER_16S((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
+<span id="cb31-2"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span>
+<span id="cb31-3"><a href=""></a><span class="kw">if</span> L_M_BV_32 <span class="op">&gt;</span> <span class="dv">32767</span> <span class="kw">then</span></span>
+<span id="cb31-4"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">7</span>FFF#;</span>
+<span id="cb31-5"><a href=""></a><span class="kw">elseif</span> L_M_BV_32 <span class="op">&lt;</span> <span class="kw">-</span><span class="dv">32768</span> <span class="kw">then</span></span>
+<span id="cb31-6"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> <span class="dv">16</span>#<span class="dv">8000</span>#;</span>
+<span id="cb31-7"><a href=""></a><span class="kw">else</span></span>
+<span id="cb31-8"><a href=""></a> P_M_DERIVE(T_ALG.E_BV) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S(L_M_BV_32));</span>
+<span id="cb31-9"><a href=""></a><span class="kw">end if</span>;</span>
+<span id="cb31-10"><a href=""></a></span>
+<span id="cb31-11"><a href=""></a>P_M_DERIVE(T_ALG.E_BH) :<span class="kw">=</span> UC_16S_EN_16NS(TBD.T_ENTIER_16S</span>
+<span id="cb31-12"><a href=""></a>                                   ((<span class="fl">1.0</span> <span class="kw">/</span> C_M_LSB_BH) <span class="kw">*</span></span>
+<span id="cb31-13"><a href=""></a>                                   G_M_INFO_DERIVE(T_ALG.E_BH));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section id="questions" class="title-slide slide level1 center" data-background-color="black">
 <h1>Questions ?</h1>
